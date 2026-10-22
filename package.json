@@ -1,8 +1,16 @@
 {
-  "name": "opencode-subscription-quota",
+  "name": "opencode-quotabar",
   "version": "0.1.0",
   "description": "Subscription quota windows for Codex and Claude (via OpenChamber) in OpenCode V2",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/girardidev/opencode-quotabar.git"
+  },
+  "homepage": "https://github.com/girardidev/opencode-quotabar#readme",
+  "bugs": {
+    "url": "https://github.com/girardidev/opencode-quotabar/issues"
+  },
   "type": "module",
   "files": [
     "src/",

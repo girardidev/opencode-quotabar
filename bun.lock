@@ -3,7 +3,7 @@
   "configVersion": 1,
   "workspaces": {
     "": {
-      "name": "opencode-subscription-quota",
+      "name": "opencode-quotabar",
       "dependencies": {
         "@opencode/client": "2.1.3",
         "@opencode/plugin": "2.1.3",
@@ -17,6 +17,11 @@
         "@types/node": "^26.6.5",
         "solid-js": "^1.9.17",
         "typescript": "^7.0.2",
+      },
+      "peerDependencies": {
+        "@opentui/core": ">=0.6.6",
+        "@opentui/solid": ">=0.6.6",
+        "solid-js": ">=1.9.12",
       },
     },
   },

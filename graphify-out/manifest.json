@@ -6,9 +6,9 @@
     "semantic_hash": ""
   },
   "package.json": {
-    "mtime": 1792707866.8157384,
-    "seen": 1792707881.9438798,
-    "ast_hash": "60eeaffc3b839835c7f240fdd0d06bb3",
+    "mtime": 1792709095.8688989,
+    "seen": 1792709127.0671291,
+    "ast_hash": "6c4ad62f96ddda907b6af49a4fe33f84",
     "semantic_hash": ""
   },
   "src/collectors/claude/collector.ts": {
@@ -72,9 +72,9 @@
     "semantic_hash": ""
   },
   "src/index.ts": {
-    "mtime": 1792706516.1970024,
-    "seen": 1792707881.943888,
-    "ast_hash": "3429829d88bfea7567817e39cceaf47d",
+    "mtime": 1792709092.0856178,
+    "seen": 1792709127.0671391,
+    "ast_hash": "23e9b325a8dac9f48bce8cbf2dd14e12",
     "semantic_hash": ""
   },
   "src/options.ts": {
@@ -90,9 +90,9 @@
     "semantic_hash": ""
   },
   "src/rpc.ts": {
-    "mtime": 1792706505.7221074,
-    "seen": 1792707881.9438899,
-    "ast_hash": "2b047ddc3d94e0d7c4440e82b289931f",
+    "mtime": 1792709092.0859792,
+    "seen": 1792709127.067141,
+    "ast_hash": "622d78f864bf2127032853c75c37b397",
     "semantic_hash": ""
   },
   "src/service.ts": {
@@ -114,9 +114,9 @@
     "semantic_hash": ""
   },
   "src/tui/index.tsx": {
-    "mtime": 1792707643.338457,
-    "seen": 1792707881.943893,
-    "ast_hash": "2dc52858fc96cf13a300e5a46c13b292",
+    "mtime": 1792709092.0864568,
+    "seen": 1792709127.067144,
+    "ast_hash": "9213ea30faecf597357df62b1c09853e",
     "semantic_hash": ""
   },
   "src/tui/keys.ts": {
@@ -246,9 +246,9 @@
     "semantic_hash": ""
   },
   "test/tui-plugin.test.tsx": {
-    "mtime": 1792707781.215035,
-    "seen": 1792707881.943905,
-    "ast_hash": "0f956535ac59928a36e17fdbdb19ef02",
+    "mtime": 1792709092.0871346,
+    "seen": 1792709127.067161,
+    "ast_hash": "57d3939312f128c50d5bdf818a72d035",
     "semantic_hash": ""
   },
   "test/tui-render.test.tsx": {
@@ -324,63 +324,141 @@
     "semantic_hash": ""
   },
   "AGENTS.md": {
-    "mtime": 1792704700.0267918,
-    "seen": 1792707881.943914,
-    "ast_hash": "f36539ecc9af68f33ebd72770ce4a19e",
+    "mtime": 1792708346.0096343,
+    "seen": 1792709127.067173,
+    "ast_hash": "794f4b8a6763bdfa072bd8708248717b",
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1792708052.0573013,
-    "seen": 1792708056.1566532,
-    "ast_hash": "b1903e20191863d3acf6c91ba070c063",
-    "semantic_hash": ""
-  },
-  "openspec/changes/add-subscription-quota-plugin/.openspec.yaml": {
-    "mtime": 1792705736.520322,
-    "seen": 1792707881.943915,
-    "ast_hash": "db874330e3bdf09469eb2e2124cebd99",
-    "semantic_hash": ""
-  },
-  "openspec/changes/add-subscription-quota-plugin/design.md": {
-    "mtime": 1792705881.89195,
-    "seen": 1792707881.943916,
-    "ast_hash": "d0edfed3d3b1eb1defcd15c758b3450a",
-    "semantic_hash": ""
-  },
-  "openspec/changes/add-subscription-quota-plugin/proposal.md": {
-    "mtime": 1792705761.9444857,
-    "seen": 1792707881.943916,
-    "ast_hash": "c9ccdd5aac80557e6c08255ea16e007d",
-    "semantic_hash": ""
-  },
-  "openspec/changes/add-subscription-quota-plugin/specs/quota-refresh-lifecycle/spec.md": {
-    "mtime": 1792705881.8929017,
-    "seen": 1792707881.943917,
-    "ast_hash": "cc50d545baa5318961f593f57eb87897",
-    "semantic_hash": ""
-  },
-  "openspec/changes/add-subscription-quota-plugin/specs/quota-visibility-and-diagnostics/spec.md": {
-    "mtime": 1792705881.8934226,
-    "seen": 1792707881.943918,
-    "ast_hash": "76e0b32fe7a6fbdc54aacc6fd28b8ac1",
-    "semantic_hash": ""
-  },
-  "openspec/changes/add-subscription-quota-plugin/specs/subscription-quota-collection/spec.md": {
-    "mtime": 1792705881.8925278,
-    "seen": 1792707881.943918,
-    "ast_hash": "594e87647c540ac9e715df6873b20c08",
-    "semantic_hash": ""
-  },
-  "openspec/changes/add-subscription-quota-plugin/tasks.md": {
-    "mtime": 1792708052.05748,
-    "seen": 1792708056.156659,
-    "ast_hash": "89ccceb94567fc7b6b75b77f59e82268",
+    "mtime": 1792709117.2102458,
+    "seen": 1792709127.067174,
+    "ast_hash": "1cc6b0bff4e671c8ef3237463dc32319",
     "semantic_hash": ""
   },
   "openspec/config.yaml": {
     "mtime": 1792704688.7990503,
     "seen": 1792707881.9439192,
     "ast_hash": "9e3e7672b387a282583011181ab35f9a",
+    "semantic_hash": ""
+  },
+  "opencode.json": {
+    "mtime": 1792708133.2703094,
+    "seen": 1792709127.067127,
+    "ast_hash": "841f85e73bee44748e0cdd484de2b1df",
+    "semantic_hash": ""
+  },
+  ".beans/opencode-sidebar-quota-usage-95o2--initial-commit.md": {
+    "mtime": 1792708572.7431219,
+    "seen": 1792709127.067165,
+    "ast_hash": "499e98e581bed22a70ba79c774becebb",
+    "semantic_hash": ""
+  },
+  ".beans/opencode-sidebar-quota-usage-rali--sync-specs-and-archive-add-subscription-quota-plug.md": {
+    "mtime": 1792708454.1320248,
+    "seen": 1792709127.067165,
+    "ast_hash": "693c5f5f54d6938736c0828e822f6752",
+    "semantic_hash": ""
+  },
+  ".beans/opencode-sidebar-quota-usage-w4jz--rename-to-opencode-quotabar-and-add-npm-publish-wo.md": {
+    "mtime": 1792709092.0803406,
+    "seen": 1792709127.0671659,
+    "ast_hash": "2ab89fa4cc144390b66d501ab63c6ead",
+    "semantic_hash": ""
+  },
+  ".github/workflows/publish.yml": {
+    "mtime": 1792709110.050691,
+    "seen": 1792709127.0671659,
+    "ast_hash": "cb9c2defd65f2fb7aec3f238e6b87d2a",
+    "semantic_hash": ""
+  },
+  "openspec/changes/archive/2026-10-22-add-subscription-quota-plugin/.openspec.yaml": {
+    "mtime": 1792705736.520322,
+    "seen": 1792709127.067175,
+    "ast_hash": "db874330e3bdf09469eb2e2124cebd99",
+    "semantic_hash": ""
+  },
+  "openspec/changes/archive/2026-10-22-add-subscription-quota-plugin/design.md": {
+    "mtime": 1792705881.89195,
+    "seen": 1792709127.067175,
+    "ast_hash": "d0edfed3d3b1eb1defcd15c758b3450a",
+    "semantic_hash": ""
+  },
+  "openspec/changes/archive/2026-10-22-add-subscription-quota-plugin/proposal.md": {
+    "mtime": 1792705761.9444857,
+    "seen": 1792709127.0671759,
+    "ast_hash": "c9ccdd5aac80557e6c08255ea16e007d",
+    "semantic_hash": ""
+  },
+  "openspec/changes/archive/2026-10-22-add-subscription-quota-plugin/specs/quota-refresh-lifecycle/spec.md": {
+    "mtime": 1792705881.8929017,
+    "seen": 1792709127.0671759,
+    "ast_hash": "cc50d545baa5318961f593f57eb87897",
+    "semantic_hash": ""
+  },
+  "openspec/changes/archive/2026-10-22-add-subscription-quota-plugin/specs/quota-visibility-and-diagnostics/spec.md": {
+    "mtime": 1792705881.8934226,
+    "seen": 1792709127.067177,
+    "ast_hash": "76e0b32fe7a6fbdc54aacc6fd28b8ac1",
+    "semantic_hash": ""
+  },
+  "openspec/changes/archive/2026-10-22-add-subscription-quota-plugin/specs/subscription-quota-collection/spec.md": {
+    "mtime": 1792705881.8925278,
+    "seen": 1792709127.067178,
+    "ast_hash": "594e87647c540ac9e715df6873b20c08",
+    "semantic_hash": ""
+  },
+  "openspec/changes/archive/2026-10-22-add-subscription-quota-plugin/tasks.md": {
+    "mtime": 1792708052.05748,
+    "seen": 1792709127.067178,
+    "ast_hash": "89ccceb94567fc7b6b75b77f59e82268",
+    "semantic_hash": ""
+  },
+  "openspec/changes/rename-to-quotabar-and-add-publish-workflow/.openspec.yaml": {
+    "mtime": 1792708934.7562275,
+    "seen": 1792709127.067179,
+    "ast_hash": "db874330e3bdf09469eb2e2124cebd99",
+    "semantic_hash": ""
+  },
+  "openspec/changes/rename-to-quotabar-and-add-publish-workflow/design.md": {
+    "mtime": 1792708988.2829514,
+    "seen": 1792709127.06718,
+    "ast_hash": "4b0dc574fe30c59e7041c7fa72dcab10",
+    "semantic_hash": ""
+  },
+  "openspec/changes/rename-to-quotabar-and-add-publish-workflow/proposal.md": {
+    "mtime": 1792708949.356356,
+    "seen": 1792709127.06718,
+    "ast_hash": "cc1c372ecdcb51add237194e37edaaac",
+    "semantic_hash": ""
+  },
+  "openspec/changes/rename-to-quotabar-and-add-publish-workflow/specs/package-release-publishing/spec.md": {
+    "mtime": 1792708988.3622627,
+    "seen": 1792709127.067181,
+    "ast_hash": "286c1210d9adaf27e868b5cd97f481e5",
+    "semantic_hash": ""
+  },
+  "openspec/changes/rename-to-quotabar-and-add-publish-workflow/tasks.md": {
+    "mtime": 1792709000.096911,
+    "seen": 1792709127.067181,
+    "ast_hash": "4be44e9df30c548d9515cb78cede94dc",
+    "semantic_hash": ""
+  },
+  "openspec/specs/quota-refresh-lifecycle/spec.md": {
+    "mtime": 1792708449.4303398,
+    "seen": 1792709127.067183,
+    "ast_hash": "29038cde277ac976eaa9e12b9849f419",
+    "semantic_hash": ""
+  },
+  "openspec/specs/quota-visibility-and-diagnostics/spec.md": {
+    "mtime": 1792708449.4306488,
+    "seen": 1792709127.0671842,
+    "ast_hash": "368ee58e631ccf156809e4a40ee465d4",
+    "semantic_hash": ""
+  },
+  "openspec/specs/subscription-quota-collection/spec.md": {
+    "mtime": 1792708449.4310064,
+    "seen": 1792709127.0671842,
+    "ast_hash": "e733592315e75c8fc1d9df16000079fb",
     "semantic_hash": ""
   }
 }

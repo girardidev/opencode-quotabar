@@ -113,11 +113,11 @@ describe("tui plugin", () => {
   test("claims /quota when free, and falls back when another plugin owns it", async () => {
     const free = fakeCtx()
     const cleanupFree = (await plugin.setup(free.ctx)) as () => void
-    expect(commands(free.calls).find(c => c.id === "opencode-subscription-quota.open").slash.name).toBe("quota")
+    expect(commands(free.calls).find(c => c.id === "opencode-quotabar.open").slash.name).toBe("quota")
     cleanupFree()
     const taken = fakeCtx({ takenSlash: "quota" })
     const cleanupTaken = (await plugin.setup(taken.ctx)) as () => void
-    expect(commands(taken.calls).find(c => c.id === "opencode-subscription-quota.open").slash.name).toBe("subscription-quota")
+    expect(commands(taken.calls).find(c => c.id === "opencode-quotabar.open").slash.name).toBe("subscription-quota")
     cleanupTaken()
   })
 
@@ -126,10 +126,10 @@ describe("tui plugin", () => {
     const cleanup = (await plugin.setup(host.ctx)) as () => void
     await settle()
     const all = commands(host.calls)
-    all.find(c => c.id === "opencode-subscription-quota.refresh").run()
+    all.find(c => c.id === "opencode-quotabar.refresh").run()
     await settle()
     expect(host.calls.refresh).toHaveLength(1)
-    all.find(c => c.id === "opencode-subscription-quota.toggle").run()
+    all.find(c => c.id === "opencode-quotabar.toggle").run()
     expect(host.prefs.collapsed).toBe(true)
     expect(Object.keys(host.prefs).sort()).toEqual(["closed", "collapsed", "hidden"])
     cleanup()

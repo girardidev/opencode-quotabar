@@ -16,7 +16,7 @@ interface Registered {
 }
 
 export default Plugin.define({
-  id: "opencode-subscription-quota.server",
+  id: "opencode-quotabar.server",
   async setup(ctx) {
     const options = parseOptions(ctx.options)
     const host = ctx as unknown as HostContext

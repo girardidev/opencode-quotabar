@@ -1,4 +1,4 @@
-# opencode-subscription-quota
+# opencode-quotabar
 
 Subscription quota windows for **Codex** (OpenAI OAuth) and **Claude** (via the OpenChamber
 `claude-code` provider) in the OpenCode V2 sidebar, with an on-demand details view.
@@ -61,7 +61,7 @@ Add it to the `plugins` array of **both** files, merging with what is already th
 - `~/.config/opencode/cli.json` (terminal half; needed for remote servers)
 
 ```jsonc
-{ "plugins": ["opencode-subscription-quota"] }
+{ "plugins": ["opencode-quotabar"] }
 ```
 
 ### From a local checkout
@@ -91,7 +91,7 @@ registers **`/subscription-quota`** instead. The command palette entry always wo
 {
   "plugins": [
     {
-      "package": "opencode-subscription-quota",
+      "package": "opencode-quotabar",
       "options": {
         "refreshTtlSeconds": 120,
         "httpTimeoutMs": 10000,
@@ -239,3 +239,36 @@ src/
   rpc.ts domain.ts      versioned RPC contract and credential-free snapshot schema
   tui/                  controller · view-model · formatting · components · entry
 ```
+
+## Releasing
+
+Releases are published to npm by `.github/workflows/publish.yml` using
+[npm Trusted Publishing](https://docs.npmjs.com/trusted-publishers) (OIDC). There is no npm token
+secret.
+
+### One-time setup
+
+1. Publish the first version by hand from a clean checkout, signed in with an npm account that has 2FA:
+   `npm publish`.
+2. On npmjs.com, open the package, go to **Settings → Trusted Publisher**, choose **GitHub Actions**
+   and enter:
+
+   | Field | Value |
+   |---|---|
+   | Organization or user | `girardidev` |
+   | Repository | `opencode-quotabar` |
+   | Workflow filename | `publish.yml` |
+   | Environment | _(leave empty)_ |
+
+3. Optionally, in the package's publishing access settings, require 2FA and disallow tokens.
+
+The workflow filename must match exactly. If you rename `publish.yml`, update the Trusted Publisher
+entry too, otherwise publishing fails with an authentication error.
+
+### Cutting a release
+
+1. Bump `version` in `package.json` and merge it to `main`.
+2. Create a GitHub Release tagged `v<version>` (for example `v0.2.0`).
+3. The workflow checks that the tag matches `package.json`, runs typecheck and tests, and publishes.
+
+Releases marked as prerelease are ignored by the workflow.

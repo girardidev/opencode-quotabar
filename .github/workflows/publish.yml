@@ -1,0 +1,57 @@
+# Publishes to npm with Trusted Publishing (OIDC). No npm token is used or needed.
+# The npm Trusted Publisher entry references this exact filename: do not rename it
+# without updating the entry on npmjs.com.
+name: Publish
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    if: github.event.release.prerelease == false
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+
+      # Trusted Publishing needs npm CLI 11.5.1 or newer.
+      - name: Ensure npm supports Trusted Publishing
+        run: |
+          required=11.5.1
+          current=$(npm --version)
+          if [ "$(printf '%s\n%s\n' "$required" "$current" | sort -V | head -n1)" != "$required" ]; then
+            npm install -g npm@latest
+          fi
+          echo "node $(node --version), npm $(npm --version)"
+
+      - name: Check release tag matches package version
+        env:
+          TAG: ${{ github.event.release.tag_name }}
+        run: |
+          version=$(node -p "require('./package.json').version")
+          if [ "$TAG" != "v$version" ]; then
+            echo "::error::Release tag '$TAG' does not match package.json version 'v$version'"
+            exit 1
+          fi
+
+      - run: bun install --frozen-lockfile
+
+      - run: bun run typecheck
+
+      - run: bun test
+
+      - name: Preview package contents
+        run: npm pack --dry-run
+
+      - name: Publish
+        run: npm publish

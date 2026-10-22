@@ -15,7 +15,7 @@ const CLOCK_MS = 15_000
 const SIDEBAR_WIDTH = 38
 
 export default Plugin.define({
-  id: "opencode-subscription-quota.tui",
+  id: "opencode-quotabar.tui",
   setup(ctx) {
     const rpc = ctx.client.rpc(QuotaRpc)
     const location = () => ctx.location ?? ctx.data.location.default()
@@ -95,10 +95,10 @@ export default Plugin.define({
     ctx.keymap.layer(() => ({
       mode: "global",
       commands: [
-        { id: "opencode-subscription-quota.open", title: "Open subscription quota", group: "Subscription quota", palette: true, slash: { name: slash }, run: open },
-        { id: "opencode-subscription-quota.refresh", title: "Refresh subscription quota", group: "Subscription quota", palette: true, run: () => void controller.sync(true) },
+        { id: "opencode-quotabar.open", title: "Open subscription quota", group: "Subscription quota", palette: true, slash: { name: slash }, run: open },
+        { id: "opencode-quotabar.refresh", title: "Refresh subscription quota", group: "Subscription quota", palette: true, run: () => void controller.sync(true) },
         {
-          id: "opencode-subscription-quota.toggle",
+          id: "opencode-quotabar.toggle",
           title: "Collapse or expand subscription quota in the sidebar",
           group: "Subscription quota",
           palette: true,

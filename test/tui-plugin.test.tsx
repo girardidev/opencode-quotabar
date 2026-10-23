@@ -1,6 +1,7 @@
 /** @jsxImportSource @opentui/solid */
 import { afterEach, describe, expect, test } from "bun:test"
 import { testRender } from "@opentui/solid"
+import { batch, createSignal } from "solid-js"
 import plugin from "../src/tui/index.tsx"
 import { QuotaRpc } from "../src/rpc.ts"
 import { codex, row, snapshot } from "./tui-helpers.ts"
@@ -16,7 +17,9 @@ interface Slot {
   render: () => unknown
 }
 
-function fakeCtx(options: { takenSlash?: string; snapshotValue?: unknown; failing?: boolean } = {}) {
+function fakeCtx(options: { takenSlash?: string; snapshotValue?: unknown; failing?: boolean; providerID?: string | undefined } = {}) {
+  // Reactive like the real host: the footer must follow model changes after mount.
+  const [providerID, setProviderID] = createSignal<string | undefined>("providerID" in options ? options.providerID : "claude-code")
   const calls = { snapshot: [] as unknown[], refresh: [] as unknown[], disposed: [] as string[], layers: [] as Array<() => any>, saved: 0 }
   const slots: Slot[] = []
   let updated: ((event: any) => void) | undefined
@@ -51,7 +54,7 @@ function fakeCtx(options: { takenSlash?: string; snapshotValue?: unknown; failin
     },
     ui: {
       slot: (claim: Slot) => (slots.push(claim), () => void calls.disposed.push(claim.append!)),
-      model: { current: () => ({ providerID: "claude-code", modelID: "x" }) },
+      model: { current: () => (providerID() ? { providerID: providerID()!, modelID: "x" } : undefined) },
       dialog: { set: () => {}, show: () => {}, clear: () => {} },
       toast: { show: () => {} },
     },
@@ -60,7 +63,7 @@ function fakeCtx(options: { takenSlash?: string; snapshotValue?: unknown; failin
       commands: () => (options.takenSlash ? [{ slash: { name: options.takenSlash } }] : []),
     },
   }
-  return { ctx, calls, slots, prefs, location, emitUpdate: (data: unknown, directory = "/work") => updated?.({ data, location: { directory } }), reconnect: () => reconnect?.() }
+  return { ctx, calls, slots, prefs, location, setProviderID, emitUpdate: (data: unknown, directory = "/work") => updated?.({ data, location: { directory } }), reconnect: () => reconnect?.() }
 }
 
 const open: Array<{ dispose(): Promise<void> }> = []
@@ -107,6 +110,83 @@ describe("tui plugin", () => {
     open.push(setup)
     await setup.renderOnce()
     expect(setup.captureCharFrame()).toContain("Claude · Weekly 78% left")
+    cleanup()
+  })
+
+  test("the footer renders nothing when the current provider has no quota row", async () => {
+    const host = fakeCtx({ providerID: "anthropic" })
+    const cleanup = (await plugin.setup(host.ctx)) as () => void
+    await settle()
+    const setup = await testRender(() => host.slots[1]!.render() as any, { width: 60, height: 3 })
+    open.push(setup)
+    await setup.renderOnce()
+    expect(setup.captureCharFrame().trim()).toBe("")
+    cleanup()
+  })
+
+  test("the footer disappears without error when the model changes to a provider without a row", async () => {
+    const host = fakeCtx()
+    const cleanup = (await plugin.setup(host.ctx)) as () => void
+    await settle()
+    const setup = await testRender(() => host.slots[1]!.render() as any, { width: 60, height: 3 })
+    open.push(setup)
+    await setup.renderOnce()
+    expect(setup.captureCharFrame()).toContain("Claude · Weekly 78% left")
+    host.setProviderID("anthropic")
+    await setup.renderOnce()
+    expect(setup.captureCharFrame().trim()).toBe("")
+    host.setProviderID("claude-code")
+    await setup.renderOnce()
+    expect(setup.captureCharFrame()).toContain("Claude · Weekly 78% left")
+    cleanup()
+  })
+
+  test("the footer survives its row vanishing from a new snapshot, alone or batched with a model change", async () => {
+    const host = fakeCtx()
+    const cleanup = (await plugin.setup(host.ctx)) as () => void
+    await settle()
+    const setup = await testRender(() => host.slots[1]!.render() as any, { width: 60, height: 3 })
+    open.push(setup)
+    await setup.renderOnce()
+    expect(setup.captureCharFrame()).toContain("Claude · Weekly 78% left")
+    host.emitUpdate(snapshot(codex()))
+    await setup.renderOnce()
+    expect(setup.captureCharFrame().trim()).toBe("")
+    host.emitUpdate(snapshot(codex(), row()))
+    await setup.renderOnce()
+    expect(setup.captureCharFrame()).toContain("Claude · Weekly 78% left")
+    batch(() => {
+      host.setProviderID("anthropic")
+      host.emitUpdate(snapshot())
+    })
+    await setup.renderOnce()
+    expect(setup.captureCharFrame().trim()).toBe("")
+    cleanup()
+  })
+
+  test("the footer copes with no current model at mount and with a model that resolves later", async () => {
+    const host = fakeCtx({ providerID: undefined })
+    const cleanup = (await plugin.setup(host.ctx)) as () => void
+    await settle()
+    const setup = await testRender(() => host.slots[1]!.render() as any, { width: 60, height: 3 })
+    open.push(setup)
+    await setup.renderOnce()
+    expect(setup.captureCharFrame().trim()).toBe("")
+    host.setProviderID("claude-code")
+    await setup.renderOnce()
+    expect(setup.captureCharFrame()).toContain("Claude · Weekly 78% left")
+    cleanup()
+  })
+
+  test("the footer stays empty when the current provider's row is hidden", async () => {
+    const host = fakeCtx()
+    const cleanup = (await plugin.setup(host.ctx)) as () => void
+    host.prefs.hidden = ["claude-code"] // set after setup: the store seeds its initial value on mount
+    await settle()
+    const setup = await testRender(() => host.slots[1]!.render() as any, { width: 60, height: 3 })
+    open.push(setup)
+    await setup.renderOnce()
+    expect(setup.captureCharFrame().trim()).toBe("")
     cleanup()
   })
 

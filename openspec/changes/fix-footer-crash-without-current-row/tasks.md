@@ -6,12 +6,12 @@
 
 ## 2. Fix
 
-- [ ] 2.1 Rewrite the footer slot in `src/tui/index.tsx` as a keyed `Show` over `currentRow()` with the hidden-preference check inside the render function and no `currentRow()!`
-- [ ] 2.2 Make `footerText` and `headline` (`src/tui/format.ts`) safe for an undefined row
+- [x] 2.1 Rewrite the footer slot in `src/tui/index.tsx` as a keyed `Show` over `currentRow()` with the hidden-preference check inside the render function and no `currentRow()!`
+- [x] 2.2 Make `footerText` and `headline` (`src/tui/format.ts`) safe for an undefined row
 
 ## 3. Verify
 
-- [ ] 3.1 Add a test that a hidden current row renders nothing in the footer, and that a visible row still renders its headline and stale marker
-- [ ] 3.2 Run the full test suite and typecheck
-- [ ] 3.3 Run `graphify update .`
+- [x] 3.1 Add a test that a hidden current row renders nothing in the footer, and that a visible row still renders its headline and stale marker
+- [x] 3.2 Run the full test suite and typecheck
+- [x] 3.3 Run `graphify update .`
 - [ ] 3.4 Reinstall as a global plugin and confirm no crash with Sonnet 5.5 selected and when switching models

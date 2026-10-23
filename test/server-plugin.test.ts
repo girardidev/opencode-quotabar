@@ -21,11 +21,16 @@ interface Fake {
   fetchCalls: Array<{ url: string; headers: Record<string, string> }>
 }
 
-function fakeHost(openaiValue: unknown = { type: "oauth", access: "oauth-ACCESS-secret", metadata: { accountId: "acct-PRIVATE-id" } }): Fake {
-  const connections = new Map<string, unknown>([
-    ["openai", { type: "credential", id: "cred_openai", label: "OAuth", method: "oauth" }],
-    ["claude-code", { type: "credential", id: "cred_marker", label: "OAuth", method: "oauth" }],
-  ])
+/**
+ * `anthropicOnly` mimics Anthropic served by a proxy plugin: the integration list enumerates
+ * known integrations, the provider list holds `anthropic`, and no connection exists for it.
+ */
+function fakeHost(
+  openaiValue: unknown = { type: "oauth", access: "oauth-ACCESS-secret", metadata: { accountId: "acct-PRIVATE-id" } },
+  anthropicOnly = false,
+): Fake {
+  const connections = new Map<string, unknown>([["openai", { type: "credential", id: "cred_openai", label: "OAuth", method: "oauth" }]])
+  if (!anthropicOnly) connections.set("claude-code", { type: "credential", id: "cred_marker", label: "OAuth", method: "oauth" })
   const queue: Array<{ type: string }> = []
   let wake: (() => void) | undefined
   let stopped = false
@@ -48,13 +53,23 @@ function fakeHost(openaiValue: unknown = { type: "oauth", access: "oauth-ACCESS-
   const ctx = {
     options: { claudeExecutable: FAKE_CLAUDE, claudeTimeoutMs: 10_000 },
     integration: {
-      list: async () => ({ data: [{ id: "openai", name: "OpenAI" }, { id: "claude-code", name: "Claude Code" }, { id: "anthropic", name: "Anthropic" }] }),
+      list: async () => ({
+        data: anthropicOnly
+          ? [{ id: "openai", name: "OpenAI" }, { id: "anthropic", name: "Anthropic" }]
+          : [{ id: "openai", name: "OpenAI" }, { id: "claude-code", name: "Claude Code" }, { id: "anthropic", name: "Anthropic" }],
+      }),
       connection: {
         active: async (id: string) => connections.get(id),
         resolve: async () => openaiValue,
       },
     },
-    provider: { list: async () => ({ data: [{ id: "openai", integrationID: "openai" }, { id: "claude-code", integrationID: null }] }) },
+    provider: {
+      list: async () => ({
+        data: anthropicOnly
+          ? [{ id: "openai", integrationID: "openai" }, { id: "anthropic", integrationID: "anthropic" }]
+          : [{ id: "openai", integrationID: "openai" }, { id: "claude-code", integrationID: null }],
+      }),
+    },
     rpc: {
       register: async (definition: unknown, handlers: unknown) => {
         expect(definition).toBe(QuotaRpc)
@@ -193,9 +208,39 @@ describe("server plugin", () => {
     const cleanup = (await plugin.setup(fake.ctx)) as () => void
     await fake.handlers.snapshot({}, {})
     await until(() => fake.emitted.some(s => s.rows.every(r => r.state === "ready")))
-    fake.setConnection("claude-code", undefined)
+    fake.setConnection("openai", undefined)
     fake.push({ type: "credential.switched" })
-    await until(() => fake.emitted.at(-1)?.rows.find(r => r.id === "claude-code")?.state === "disconnected")
+    await until(() => fake.emitted.at(-1)?.rows.find(r => r.id === "openai")?.state === "disconnected")
+    cleanup()
+  })
+
+  test("Claude served through the anthropic provider reports limits without any connection", async () => {
+    const fake = fakeHost(undefined, true)
+    stubWham(fake)
+    const cleanup = (await plugin.setup(fake.ctx)) as () => void
+    const first = await fake.handlers.snapshot({}, {})
+    expect(first.rows.map((r: any) => r.id)).toEqual(["openai", "claude-code"])
+    await until(() => fake.emitted.some(s => s.rows.find(r => r.id === "claude-code")?.state === "ready"))
+    const snapshot = await fake.handlers.snapshot({}, {})
+    expect(snapshotSchema.safeParse(snapshot).success).toBe(true)
+    const claude = snapshot.rows.find((r: any) => r.id === "claude-code")
+    expect(claude.windows.map((w: any) => [w.label, w.remaining])).toEqual([["Session", 100], ["Weekly", 78]])
+    expect(claude.source).toBe("claude-cli")
+    expect(claude.partition).toMatch(/^[0-9a-f]{16}$/)
+    expect(leaksAny([snapshot, ...fake.emitted], [...SECRETS, "cred_marker"])).toBe(false)
+    cleanup()
+  })
+
+  test("a missing Claude CLI without a connection names the prerequisite, not a disconnected row", async () => {
+    const fake = fakeHost(undefined, true)
+    fake.ctx.options = { claudeExecutable: "/nonexistent/claude" }
+    stubWham(fake)
+    const cleanup = (await plugin.setup(fake.ctx)) as () => void
+    await fake.handlers.snapshot({}, {})
+    await until(() => fake.emitted.some(s => s.rows.find(r => r.id === "claude-code")?.state === "unavailable"))
+    const row = fake.emitted.at(-1)!.rows.find(r => r.id === "claude-code")!
+    expect(row.diagnostic?.code).toBe("cli_missing")
+    expect(row.diagnostic?.action).toContain("claudeExecutable")
     cleanup()
   })
 

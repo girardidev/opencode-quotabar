@@ -3,16 +3,55 @@ import { BACKOFF_BASE_MS, BACKOFF_CAP_MS, LEASE_MS } from "../src/service.ts"
 import { conn, fail, harness, windows } from "./service-harness.ts"
 
 describe("discovery and rows", () => {
-  test("detected integrations without a connection stay visible and explain themselves", async () => {
+  test("detected integrations that need a connection stay visible and explain themselves", async () => {
+    const h = harness()
+    h.state.connections.set("openai", undefined)
+    const snapshot = await h.service.snapshot()
+    const openai = h.row(snapshot, "openai")
+    expect(openai.state).toBe("disconnected")
+    expect(openai.diagnostic?.code).toBe("not_connected")
+    expect(openai.windows).toEqual([])
+    expect(h.pending("openai")).toHaveLength(0)
+    expect(h.pending("claude-code")).toHaveLength(1)
+  })
+
+  test("the Claude row collects without a connection", async () => {
     const h = harness()
     h.state.connections.set("claude-code", undefined)
     const snapshot = await h.service.snapshot()
-    const claude = h.row(snapshot, "claude-code")
-    expect(claude.state).toBe("disconnected")
-    expect(claude.diagnostic?.code).toBe("not_connected")
+    expect(h.row(snapshot, "claude-code").state).toBe("loading")
+    expect(h.pending("claude-code")).toHaveLength(1)
+    h.pending("claude-code")[0]!.resolve()
+    await h.settle()
+    const claude = h.row(h.service.view(), "claude-code")
+    expect(claude.state).toBe("ready")
+    expect(claude.diagnostic).toBeUndefined()
+  })
+
+  test("a Claude row detected only through the anthropic provider collects", async () => {
+    const h = harness()
+    h.state.integrations = [{ id: "anthropic", name: "Anthropic" }]
+    h.state.providers = [{ id: "anthropic", integrationID: "anthropic" }]
+    h.state.connections.clear()
+    await h.service.snapshot()
+    expect(h.pending("claude-code")).toHaveLength(1)
+    expect(h.pending("openai")).toHaveLength(0)
+  })
+
+  test("the Claude row resets when it moves between having a connection and not", async () => {
+    const h = harness()
+    await h.service.snapshot()
+    h.pending("claude-code")[0]!.resolve()
+    await h.settle()
+    expect(h.row(h.service.view(), "claude-code").windows).toHaveLength(1)
+
+    h.state.connections.set("claude-code", undefined)
+    await h.service.reconcile()
+    await h.settle()
+    const claude = h.row(h.service.view(), "claude-code")
     expect(claude.windows).toEqual([])
-    expect(h.pending("claude-code")).toHaveLength(0)
-    expect(h.pending("openai")).toHaveLength(1)
+    expect(claude.state).toBe("loading")
+    expect(h.pending("claude-code")).toHaveLength(1)
   })
 
   test("first snapshot shows loading rows without hiding anything", async () => {

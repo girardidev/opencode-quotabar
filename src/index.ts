@@ -27,18 +27,17 @@ export default Plugin.define({
       ttlMs: options.ttlMs,
       emit: snapshot => void registration?.events.emit("updated", snapshot).catch(() => {}),
       collector(detected) {
-        if (!detected.connection) throw new CollectError("not_connected")
-        const connectionKey = `${detected.connection.kind}:${detected.connection.id}`
         if (detected.id === "openai") {
+          if (!detected.connection) throw new CollectError("not_connected")
           return createCodexCollector({
-            connectionKey,
+            connectionKey: `${detected.connection.kind}:${detected.connection.id}`,
             resolve: hostCodexCredential(host, detected.connection),
             httpTimeoutMs: options.httpTimeoutMs,
             maxOutputBytes: options.maxOutputBytes,
           })
         }
         return createClaudeCollector({
-          connectionKey,
+          ...(detected.connection ? { connectionKey: `${detected.connection.kind}:${detected.connection.id}` } : {}),
           executable: options.claudeExecutable,
           timeoutMs: options.claudeTimeoutMs,
           maxOutputBytes: options.maxOutputBytes,

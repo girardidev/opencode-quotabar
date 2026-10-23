@@ -39,4 +39,4 @@ Existing tests pin `providerID: "claude-code"`, so the provider-without-row path
 
 ## Open Questions
 
-- What `providerID` does the host report for Sonnet 5.5 in the reporter's setup? Confirms which path triggered the crash.
+- ~~What `providerID` does the host report for Sonnet 5.5 in the reporter's setup?~~ Resolved: it is `claude-code`, which has a row, so the crash was not a plain "provider without a row" case. The root cause was never reproduced; the keyed `Show` and the tolerant `headline` made the crash go away for the reporter, but which of the two mechanisms mattered is unknown.

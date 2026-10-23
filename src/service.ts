@@ -199,8 +199,13 @@ export class QuotaService {
     for (const entry of this.entries.values()) if (this.isDue(entry, now)) void this.start(entry)
   }
 
+  /** A collector that authenticates on its own (the Claude CLI) does not need a host connection. */
+  private connectable(entry: Entry): boolean {
+    return Boolean(entry.detected.connection) || !entry.detected.connectionRequired
+  }
+
   private isDue(entry: Entry, now: number): boolean {
-    if (!entry.detected.connection || entry.inflight || now < entry.nextAllowedAt) return false
+    if (!this.connectable(entry) || entry.inflight || now < entry.nextAllowedAt) return false
     if (entry.attemptedAt === undefined || !entry.lastOk) return true
     if (entry.observedAt === undefined || now - entry.observedAt >= this.deps.ttlMs) return true
     // A passed reset deadline asks for a fresh read; it never marks anything replenished.
@@ -210,7 +215,7 @@ export class QuotaService {
   /** Starts a collection now. Callers decide TTL/due-ness; failure backoff is enforced here for everyone. */
   private start(entry: Entry): Promise<void> {
     if (entry.inflight) return entry.inflight
-    if (!entry.detected.connection) {
+    if (!this.connectable(entry)) {
       this.markDisconnected(entry)
       return Promise.resolve()
     }
@@ -308,7 +313,7 @@ export class QuotaService {
   }
 
   private row(entry: Entry, now: number): QuotaRow {
-    const connected = Boolean(entry.detected.connection)
+    const connected = this.connectable(entry)
     const diagnostic = connected ? entry.diagnostic : (entry.diagnostic ?? describe("not_connected"))
     let state: QuotaRow["state"]
     if (!connected) state = "disconnected"

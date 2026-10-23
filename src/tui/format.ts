@@ -43,7 +43,8 @@ export function formatAge(timestamp: number | undefined, now: number): string {
 }
 
 /** The server's headline meter when supplied, otherwise the lowest known remaining window. */
-export function headline(row: QuotaRow): QuotaWindow | undefined {
+export function headline(row: QuotaRow | undefined): QuotaWindow | undefined {
+  if (!row?.windows) return undefined
   const active = row.windows.find(window => window.active && window.remaining !== undefined)
   if (active) return active
   const known = row.windows.filter(window => window.remaining !== undefined)

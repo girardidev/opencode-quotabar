@@ -150,4 +150,28 @@ describe("claude collector", () => {
     const result = await collector(raw()).collect(new AbortController().signal)
     expect(JSON.stringify(result)).not.toContain("cred_marker")
   })
+
+  describe("without a connection", () => {
+    const bare = (result: RawClaudeUsage) => createClaudeCollector({ executable: "claude", timeoutMs: 1000, maxOutputBytes: 1000, run: async () => result })
+
+    test("binds the partition to the verified CLI identity alone", async () => {
+      const result = await bare(raw()).collect(new AbortController().signal)
+      expect(result.partition).toMatch(/^[0-9a-f]{16}$/)
+      const other = await bare(raw({ account: { ...account, email: "other@example.test" }, accountAfter: undefined })).collect(new AbortController().signal)
+      expect(other.partition).toMatch(/^[0-9a-f]{16}$/)
+      expect(other.partition).not.toBe(result.partition)
+      expect(result.partition).not.toBe((await collector(raw()).collect(new AbortController().signal)).partition)
+    })
+
+    test("an account that changes during the request is still discarded", async () => {
+      const run = bare(raw({ accountAfter: { ...account, organization: "Other Org" } }))
+      await expect(run.collect(new AbortController().signal)).rejects.toMatchObject({ code: "account_mismatch" })
+    })
+
+    test("missing identity is flagged and gets no partition", async () => {
+      const result = await bare(raw({ account: { apiProvider: "firstParty", subscriptionType: "pro" }, accountAfter: undefined })).collect(new AbortController().signal)
+      expect(result.identityUnverified).toBe(true)
+      expect(result.partition).toBeUndefined()
+    })
+  })
 })

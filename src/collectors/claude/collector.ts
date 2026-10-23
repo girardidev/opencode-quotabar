@@ -5,8 +5,8 @@ import { parseClaudeUsage } from "./usage.ts"
 import { runClaudeUsage, type ClaudeAccount, type RawClaudeUsage, type TransportOptions } from "./transport.ts"
 
 export interface ClaudeDeps {
-  /** Stable private id of the OpenChamber connection marker. It is never sent anywhere. */
-  connectionKey: string
+  /** Stable private id of the OpenChamber connection marker, when there is one. It is never sent anywhere. */
+  connectionKey?: string
   executable: string
   timeoutMs: number
   maxOutputBytes: number

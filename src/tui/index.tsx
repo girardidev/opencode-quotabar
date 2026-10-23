@@ -127,10 +127,15 @@ export default Plugin.define({
     const stopFooter = ctx.ui.slot({
       append: "prompt.footer.status",
       render: () => (
-        <Show when={currentRow() && !isHidden(prefs, currentRow()!.id)}>
-          <text fg={ctx.theme.text.muted} onMouseUp={(event: { stopPropagation(): void }) => (event.stopPropagation(), open())}>
-            {footerText(currentRow()!, state().status !== "ok")}
-          </text>
+        // Keyed: the child receives the row itself, so it can never re-read a row that has since vanished.
+        <Show when={currentRow()} keyed>
+          {row => (
+            <Show when={!isHidden(prefs, row.id)}>
+              <text fg={ctx.theme.text.muted} onMouseUp={(event: { stopPropagation(): void }) => (event.stopPropagation(), open())}>
+                {footerText(row, state().status !== "ok")}
+              </text>
+            </Show>
+          )}
         </Show>
       ),
     })
@@ -146,7 +151,8 @@ export default Plugin.define({
   },
 })
 
-function footerText(row: QuotaRow, offline: boolean): string {
+function footerText(row: QuotaRow | undefined, offline: boolean): string {
+  if (!row) return ""
   const top = headline(row)
   const value = top ? `${top.label} ${formatRemaining(top)}` : row.state === "loading" ? "loading…" : "unavailable"
   return `${row.name} · ${value}${offline || row.freshness === "stale" ? " · stale" : ""}`

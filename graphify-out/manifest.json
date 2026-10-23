@@ -108,15 +108,15 @@
     "semantic_hash": ""
   },
   "src/tui/format.ts": {
-    "mtime": 1792707708.396213,
-    "seen": 1792707881.943892,
-    "ast_hash": "2f43f1023e16344f07c81ded941af282",
+    "mtime": 1792722116.6016777,
+    "seen": 1792722131.684148,
+    "ast_hash": "04d782d64fc0683042cc4ccdbc039cc4",
     "semantic_hash": ""
   },
   "src/tui/index.tsx": {
-    "mtime": 1792709092.0864568,
-    "seen": 1792709127.067144,
-    "ast_hash": "9213ea30faecf597357df62b1c09853e",
+    "mtime": 1792722116.4253416,
+    "seen": 1792722131.684148,
+    "ast_hash": "6d1997c628f23edf4cbaa8c1546bcbb0",
     "semantic_hash": ""
   },
   "src/tui/keys.ts": {
@@ -246,9 +246,9 @@
     "semantic_hash": ""
   },
   "test/tui-plugin.test.tsx": {
-    "mtime": 1792709092.0871346,
-    "seen": 1792709127.067161,
-    "ast_hash": "57d3939312f128c50d5bdf818a72d035",
+    "mtime": 1792711789.6917367,
+    "seen": 1792722131.684164,
+    "ast_hash": "53859096dd7ad6b67fee9c6024ff3fa6",
     "semantic_hash": ""
   },
   "test/tui-render.test.tsx": {
@@ -324,8 +324,8 @@
     "semantic_hash": ""
   },
   "AGENTS.md": {
-    "mtime": 1792708346.0096343,
-    "seen": 1792709127.067173,
+    "mtime": 1792711515.7657943,
+    "seen": 1792722131.6841779,
     "ast_hash": "794f4b8a6763bdfa072bd8708248717b",
     "semantic_hash": ""
   },
@@ -342,9 +342,9 @@
     "semantic_hash": ""
   },
   "opencode.json": {
-    "mtime": 1792708133.2703094,
-    "seen": 1792709127.067127,
-    "ast_hash": "841f85e73bee44748e0cdd484de2b1df",
+    "mtime": 1792721368.3495817,
+    "seen": 1792722131.684133,
+    "ast_hash": "17c88a8c71574912964690105e6d5773",
     "semantic_hash": ""
   },
   ".beans/opencode-sidebar-quota-usage-95o2--initial-commit.md": {
@@ -360,9 +360,9 @@
     "semantic_hash": ""
   },
   ".beans/opencode-sidebar-quota-usage-w4jz--rename-to-opencode-quotabar-and-add-npm-publish-wo.md": {
-    "mtime": 1792709092.0803406,
-    "seen": 1792709127.0671659,
-    "ast_hash": "2ab89fa4cc144390b66d501ab63c6ead",
+    "mtime": 1792709127.3720071,
+    "seen": 1792722131.68417,
+    "ast_hash": "266ac17c141976401b51be5cf6f8ff32",
     "semantic_hash": ""
   },
   ".github/workflows/publish.yml": {
@@ -438,9 +438,9 @@
     "semantic_hash": ""
   },
   "openspec/changes/rename-to-quotabar-and-add-publish-workflow/tasks.md": {
-    "mtime": 1792709000.096911,
-    "seen": 1792709127.067181,
-    "ast_hash": "4be44e9df30c548d9515cb78cede94dc",
+    "mtime": 1792709127.1171849,
+    "seen": 1792722131.684191,
+    "ast_hash": "174399c77cd07d47e5fe0b0135d038d3",
     "semantic_hash": ""
   },
   "openspec/specs/quota-refresh-lifecycle/spec.md": {
@@ -459,6 +459,42 @@
     "mtime": 1792708449.4310064,
     "seen": 1792709127.0671842,
     "ast_hash": "e733592315e75c8fc1d9df16000079fb",
+    "semantic_hash": ""
+  },
+  ".beans/opencode-sidebar-quota-usage-1mxh--fix-footer-crash-when-current-provider-has-no-quot.md": {
+    "mtime": 1792721942.754785,
+    "seen": 1792722131.6841679,
+    "ast_hash": "0cae87fcfb42b3fecbc82231a7bb92b7",
+    "semantic_hash": ""
+  },
+  "openspec/changes/fix-footer-crash-without-current-row/.openspec.yaml": {
+    "mtime": 1792721942.7551403,
+    "seen": 1792722131.684185,
+    "ast_hash": "db874330e3bdf09469eb2e2124cebd99",
+    "semantic_hash": ""
+  },
+  "openspec/changes/fix-footer-crash-without-current-row/design.md": {
+    "mtime": 1792721942.75534,
+    "seen": 1792722131.684185,
+    "ast_hash": "eed42ab9059b3b0ee95352f096daddb3",
+    "semantic_hash": ""
+  },
+  "openspec/changes/fix-footer-crash-without-current-row/proposal.md": {
+    "mtime": 1792721942.7555363,
+    "seen": 1792722131.6841862,
+    "ast_hash": "bfa514652b53464cc213585d724b5f49",
+    "semantic_hash": ""
+  },
+  "openspec/changes/fix-footer-crash-without-current-row/specs/quota-visibility-and-diagnostics/spec.md": {
+    "mtime": 1792721942.7558544,
+    "seen": 1792722131.684187,
+    "ast_hash": "81929a2af6de1c37a7b97670b0a9bc13",
+    "semantic_hash": ""
+  },
+  "openspec/changes/fix-footer-crash-without-current-row/tasks.md": {
+    "mtime": 1792721942.7559924,
+    "seen": 1792722131.684187,
+    "ast_hash": "5d3def0e8ac79a0594df5006906f32cd",
     "semantic_hash": ""
   }
 }

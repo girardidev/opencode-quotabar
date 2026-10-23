@@ -19,9 +19,22 @@ export interface Detected {
   id: SupportedIntegration
   name: string
   connection?: HostConnection
+  /** False when the collector authenticates on its own, so a missing connection is not a fault. */
+  connectionRequired: boolean
 }
 
 const DISPLAY: Record<SupportedIntegration, string> = { openai: "Codex", "claude-code": "Claude" }
+
+const CONNECTION_REQUIRED: Record<SupportedIntegration, boolean> = { openai: true, "claude-code": false }
+
+/**
+ * Provider identifiers that enroll an integration, besides its own id. The integration list
+ * enumerates everything the host knows, so only the provider list can tell that Anthropic is in use.
+ */
+const PROVIDER_IDS: Record<SupportedIntegration, readonly string[]> = {
+  openai: ["openai"],
+  "claude-code": ["claude-code", "anthropic"],
+}
 
 /**
  * Finds the supported integrations by explicit identifier. A detected integration is
@@ -32,11 +45,11 @@ export async function discover(port: DiscoveryPort): Promise<Detected[]> {
   const found: Detected[] = []
   for (const id of INTEGRATIONS) {
     const integration = integrations.some(entry => entry.id === id)
-    const provider = providers.some(entry => entry.id === id || entry.integrationID === id)
+    const provider = providers.some(entry => PROVIDER_IDS[id].some(match => entry.id === match || entry.integrationID === match))
     if (!integration && !provider) continue
     // Connections hang off the integration id; a provider without one cannot be connected.
     const connection = integration ? await port.activeConnection(id) : undefined
-    found.push({ id, name: DISPLAY[id], ...(connection ? { connection } : {}) })
+    found.push({ id, name: DISPLAY[id], connectionRequired: CONNECTION_REQUIRED[id], ...(connection ? { connection } : {}) })
   }
   return found
 }

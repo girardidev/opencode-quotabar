@@ -1,6 +1,6 @@
 {
   "name": "opencode-quotabar",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Subscription quota windows for Codex and Claude (via OpenChamber) in OpenCode V2",
   "license": "MIT",
   "repository": {

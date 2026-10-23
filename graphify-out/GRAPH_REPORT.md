@@ -1,31 +1,31 @@
-# Graph Report - opencode-quotabar  (2026-10-22)
+# Graph Report - opencode-quotabar  (2026-10-23)
 
 ## Corpus Check
-- 77 files · ~40,344 words
+- 89 files · ~48,575 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 3 file(s) not represented in the graph (top: (none) 1, .lock 1, .toml 1)
 
 ## Summary
-- 667 nodes · 1234 edges · 38 communities (26 shown, 12 thin omitted)
-- Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 34 edges (avg confidence: 0.88)
+- 781 nodes · 1379 edges · 48 communities (33 shown, 15 thin omitted)
+- Extraction: 96% EXTRACTED · 4% INFERRED · 0% AMBIGUOUS · INFERRED: 54 edges (avg confidence: 0.9)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `7d9a8239`
+- Built from commit: `1e0e2598`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
 - views.tsx
-- architecture.test.ts
+- server-plugin.test.ts
 - service.ts
 - codex.ts
 - package.json
 - QuotaService
 - Requirements
-- src/index.ts
+- Requirement: Consistent quota display direction
 - ADDED Requirements
-- setup
+- detailsCommands
 - opencode-subscription-quota
 - ADDED Requirements
 - Requirements
@@ -47,75 +47,86 @@
 - opencode-sidebar-quota-usage-w4jz--rename-to-opencode-quotabar-and-add-npm-publish-wo.md
 - headline
 - Requirement: Footer status tolerates providers without a quota row
+- Requirement: Supported integration discovery
+- QuotaController
+- compact-quota-display/design.md
+- rename-to-quotabar-and-add-publish-workflow/design.md
+- 2026-10-23-show-claude-quota-for-anthropic-provider/proposal.md
+- compact-quota-display/proposal.md
+- fake-claude.ts
+- compact-quota-display/tasks.md
+- opencode-sidebar-quota-usage-nit9--clarify-npm-trusted-publisher-settings.md
+- opencode-sidebar-quota-usage-nxql--implement-compact-quota-display.md
+- opencode-sidebar-quota-usage-u2w0--propose-compact-quota-ui-and-global-usage-display.md
 
 ## God Nodes (most connected - your core abstractions)
-1. `QuotaService` - 28 edges
+1. `QuotaService` - 29 edges
 2. `QuotaSnapshot` - 21 edges
-3. `CollectError` - 20 edges
-4. `DetailsView()` - 19 edges
-5. `SupportedIntegration` - 14 edges
-6. `setup()` - 14 edges
-7. `QuotaController` - 13 edges
-8. `isRecord()` - 12 edges
-9. `QuotaWindow` - 12 edges
-10. `SidebarRow()` - 12 edges
+3. `DetailsView()` - 21 edges
+4. `CollectError` - 20 edges
+5. `setup()` - 15 edges
+6. `SupportedIntegration` - 14 edges
+7. `SidebarRow()` - 14 edges
+8. `QuotaController` - 13 edges
+9. `isRecord()` - 12 edges
+10. `QuotaWindow` - 12 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `Decisions` --references--> `headline()`  [INFERRED]
-  openspec/changes/fix-footer-crash-without-current-row/design.md → src/tui/format.ts
-- `Impact` --references--> `headline()`  [INFERRED]
-  openspec/changes/fix-footer-crash-without-current-row/proposal.md → src/tui/format.ts
-- `What Changes` --references--> `headline()`  [INFERRED]
-  openspec/changes/fix-footer-crash-without-current-row/proposal.md → src/tui/format.ts
-- `2. Fix` --references--> `headline()`  [INFERRED]
-  openspec/changes/fix-footer-crash-without-current-row/tasks.md → src/tui/format.ts
-- `Decisions` --references--> `footerText()`  [INFERRED]
-  openspec/changes/fix-footer-crash-without-current-row/design.md → src/tui/index.tsx
+- `3. Convert only at the presentation boundary` --references--> `formatRemaining()`  [INFERRED]
+  openspec/changes/compact-quota-display/design.md → src/tui/format.ts
+- `2. Persist a single presentation mode` --references--> `Prefs`  [INFERRED]
+  openspec/changes/compact-quota-display/design.md → src/tui/model.ts
+- `Summary of Changes` --references--> `Detected`  [INFERRED]
+  .beans/opencode-sidebar-quota-usage-uc67--show-claude-quota-when-anthropic-is-served-by-a-pr.md → src/discovery.ts
+- `2. Discovery` --references--> `Detected`  [INFERRED]
+  openspec/changes/archive/2026-10-23-show-claude-quota-for-anthropic-provider/tasks.md → src/discovery.ts
+- `Open Questions` --references--> `headline()`  [INFERRED]
+  openspec/changes/archive/2026-10-22-fix-footer-crash-without-current-row/design.md → src/tui/format.ts
 
 ## Import Cycles
 - None detected.
 
-## Communities (38 total, 12 thin omitted)
+## Communities (48 total, 15 thin omitted)
 
 ### Community 0 - "views.tsx"
 Cohesion: 0.07
-Nodes (58): @opentui/solid, solid-js, QuotaRow, QuotaSnapshot, ControllerState, QuotaController, CODE_LABEL, formatAge() (+50 more)
+Nodes (60): Context, @opentui/solid, solid-js, QuotaRow, QuotaSnapshot, ControllerState, CODE_LABEL, displayPercent() (+52 more)
 
-### Community 1 - "architecture.test.ts"
-Cohesion: 0.10
-Nodes (16): Context, Decisions, Goals / Non-Goals, Migration Plan, Open Questions, Risks / Trade-offs, files(), src (+8 more)
+### Community 1 - "server-plugin.test.ts"
+Cohesion: 0.06
+Nodes (28): @opencode/plugin, zod, INTEGRATIONS, snapshotSchema, hostCodexCredential(), HostContext, hostDiscovery(), RawConnection (+20 more)
 
 ### Community 2 - "service.ts"
-Cohesion: 0.08
-Nodes (29): Collector, Source, connectionKey(), Detected, discover(), DiscoveryPort, DISPLAY, HostConnection (+21 more)
+Cohesion: 0.06
+Nodes (42): Decisions, 1. Spike: what the host reports, 2. Discovery, 3. Scheduler, 4. Collector wiring, 5. Verify, Collector, COMMON (+34 more)
 
 ### Community 3 - "codex.ts"
-Cohesion: 0.06
-Nodes (62): ClaudeDeps, createClaudeCollector(), identity(), abortError(), buildChildEnv(), classifyControlError(), classifyStderr(), CLAUDE_ARGS (+54 more)
+Cohesion: 0.07
+Nodes (53): ClaudeDeps, createClaudeCollector(), identity(), abortError(), buildChildEnv(), classifyControlError(), classifyStderr(), CLAUDE_ARGS (+45 more)
 
 ### Community 4 - "package.json"
 Cohesion: 0.05
 Nodes (42): bugs, url, dependencies, @opencode/client, @opencode/plugin, zod, description, devDependencies (+34 more)
 
 ### Community 5 - "QuotaService"
-Cohesion: 0.18
-Nodes (5): describe(), diagnose(), setup(), Clock, QuotaService
+Cohesion: 0.12
+Nodes (10): Summary of Changes, Context, Goals / Non-Goals, Open Questions, Risks / Trade-offs, describe(), diagnose(), setup() (+2 more)
 
 ### Community 6 - "Requirements"
-Cohesion: 0.07
-Nodes (26): Purpose, Requirement: Account-bound collection, Requirement: Bounded and isolated CLI execution, Requirement: Codex subscription collection, Requirement: Credential-free snapshots, Requirement: Dynamic and partial quota normalization, Requirement: Prompt-free Claude usage collection, Requirement: Supported integration discovery (+18 more)
+Cohesion: 0.06
+Nodes (35): Purpose, Requirement: Account-bound collection, Requirement: Bounded and isolated CLI execution, Requirement: Codex subscription collection, Requirement: Connection-optional Claude collection, Requirement: Credential-free snapshots, Requirement: Dynamic and partial quota normalization, Requirement: Prompt-free Claude usage collection (+27 more)
 
-### Community 7 - "src/index.ts"
+### Community 7 - "Requirement: Consistent quota display direction"
 Cohesion: 0.09
-Nodes (21): @opencode/plugin, zod, snapshotSchema, hostCodexCredential(), HostContext, hostDiscovery(), RawConnection, resolve() (+13 more)
+Nodes (22): ADDED Requirements, MODIFIED Requirements, Requirement: Accessible presentation preferences, Requirement: Consistent quota display direction, Requirement: Subscription sidebar and details, Scenario: Changing the shared mode, Scenario: Compact content does not fit, Scenario: Compact summary (+14 more)
 
 ### Community 8 - "ADDED Requirements"
 Cohesion: 0.08
 Nodes (24): ADDED Requirements, Requirement: Account-bound collection, Requirement: Bounded and isolated CLI execution, Requirement: Codex subscription collection, Requirement: Credential-free snapshots, Requirement: Dynamic and partial quota normalization, Requirement: Prompt-free Claude usage collection, Requirement: Supported integration discovery (+16 more)
 
-### Community 9 - "setup"
-Cohesion: 0.14
-Nodes (5): QuotaPort, detailsCommands(), DetailsKeyApi, KeyCommand, api()
+### Community 9 - "detailsCommands"
+Cohesion: 0.22
+Nodes (6): Details(), open(), detailsCommands(), DetailsKeyApi, KeyCommand, api()
 
 ### Community 10 - "opencode-subscription-quota"
 Cohesion: 0.10
@@ -146,8 +157,8 @@ Cohesion: 0.20
 Nodes (9): Check for context, Ending Discovery, Guardrails, OpenSpec Awareness, The Stance, What You Don't Have To Do, What You Might Do, When a change exists (+1 more)
 
 ### Community 17 - "Requirements"
-Cohesion: 0.11
-Nodes (17): Purpose, quota-visibility-and-diagnostics Specification, Requirement: Accessible presentation preferences, Requirement: Actionable sanitized diagnostics, Requirement: Explicit unavailable and stale states, Requirement: Local and remote execution guidance, Requirement: Subscription sidebar and details, Requirements (+9 more)
+Cohesion: 0.09
+Nodes (22): Purpose, quota-visibility-and-diagnostics Specification, Requirement: Accessible presentation preferences, Requirement: Actionable sanitized diagnostics, Requirement: Explicit unavailable and stale states, Requirement: Footer status tolerates providers without a quota row, Requirement: Local and remote execution guidance, Requirement: Subscription sidebar and details (+14 more)
 
 ### Community 18 - "ADDED Requirements"
 Cohesion: 0.12
@@ -175,31 +186,59 @@ Nodes (5): 1. Rename package and identifiers, 2. Package metadata, 3. Publish wo
 
 ### Community 35 - "headline"
 Cohesion: 0.13
-Nodes (16): Context, Decisions, Goals / Non-Goals, Open Questions, Risks / Trade-offs, Capabilities, Impact, Modified Capabilities (+8 more)
+Nodes (17): Summary of Changes, Context, Decisions, Goals / Non-Goals, Open Questions, Risks / Trade-offs, Capabilities, Impact (+9 more)
 
 ### Community 36 - "Requirement: Footer status tolerates providers without a quota row"
 Cohesion: 0.29
 Nodes (6): ADDED Requirements, Requirement: Footer status tolerates providers without a quota row, Scenario: Current provider changes to one without a row, Scenario: Current provider has a visible row, Scenario: Current provider row is hidden, Scenario: Provider without a quota row
 
+### Community 37 - "Requirement: Supported integration discovery"
+Cohesion: 0.11
+Nodes (17): ADDED Requirements, MODIFIED Requirements, Requirement: Account-bound collection, Requirement: Connection-optional Claude collection, Requirement: Supported integration discovery, Scenario: Anthropic integration available but unused, Scenario: Anthropic served by another plugin, Scenario: Both identifiers present (+9 more)
+
+### Community 39 - "compact-quota-display/design.md"
+Cohesion: 0.22
+Nodes (8): 1. Recompose the shared window block, 2. Persist a single presentation mode, 3. Convert only at the presentation boundary, Decisions, Goals / Non-Goals, Migration Plan, Open Questions, Risks / Trade-offs
+
+### Community 40 - "rename-to-quotabar-and-add-publish-workflow/design.md"
+Cohesion: 0.25
+Nodes (7): Context, Decisions, Goals / Non-Goals, Migration Plan, Open Questions, Risks / Trade-offs, files()
+
+### Community 41 - "2026-10-23-show-claude-quota-for-anthropic-provider/proposal.md"
+Cohesion: 0.29
+Nodes (6): Capabilities, Impact, Modified Capabilities, New Capabilities, What Changes, Why
+
+### Community 42 - "compact-quota-display/proposal.md"
+Cohesion: 0.29
+Nodes (6): Capabilities, Impact, Modified Capabilities, New Capabilities, What Changes, Why
+
+### Community 43 - "fake-claude.ts"
+Cohesion: 0.48
+Nodes (6): account, fragmented(), handle(), out(), reply(), usage
+
+### Community 44 - "compact-quota-display/tasks.md"
+Cohesion: 0.40
+Nodes (4): 1. Presentation preference and formatting, 2. Compact quota rendering, 3. Global preference control, 4. Verification and documentation
+
 ## Knowledge Gaps
 - **5 isolated node(s):** `@opencode/client`, `@opencode/theme`, `@types/bun`, `@types/node`, `typescript`
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 304 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **12 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 377 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **15 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `@opencode/plugin` connect `src/index.ts` to `views.tsx`, `package.json`?**
-  _High betweenness centrality (0.030) - this node is a cross-community bridge._
+- **Why does `QuotaSnapshot` connect `views.tsx` to `server-plugin.test.ts`, `service.ts`, `QuotaService`?**
+  _High betweenness centrality (0.024) - this node is a cross-community bridge._
+- **Are the 5 inferred relationships involving `setup()` (e.g. with `.dispose()` and `.start()`) actually correct?**
+  _`setup()` has 5 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `@opencode/client`, `@opencode/theme`, `@types/bun` to the rest of the system?**
   _5 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `views.tsx` be split into smaller, more focused modules?**
-  _Cohesion score 0.06974921630094044 - nodes in this community are weakly interconnected._
-- **Why does `QuotaSnapshot` connect `views.tsx` to `service.ts`, `QuotaService`, `src/index.ts`?**
-  _High betweenness centrality (0.027) - this node is a cross-community bridge._
-- **Should `architecture.test.ts` be split into smaller, more focused modules?**
-  _Cohesion score 0.10144927536231885 - nodes in this community are weakly interconnected._
-- **Why does `QuotaService` connect `QuotaService` to `service.ts`, `src/index.ts`?**
+  _Cohesion score 0.07314524555903866 - nodes in this community are weakly interconnected._
+- **Why does `@opencode/plugin` connect `server-plugin.test.ts` to `views.tsx`, `package.json`?**
   _High betweenness centrality (0.023) - this node is a cross-community bridge._
-- **Should `service.ts` be split into smaller, more focused modules?**
-  _Cohesion score 0.08156028368794327 - nodes in this community are weakly interconnected._
+- **Should `server-plugin.test.ts` be split into smaller, more focused modules?**
+  _Cohesion score 0.06196078431372549 - nodes in this community are weakly interconnected._
+- **Why does `QuotaService` connect `QuotaService` to `server-plugin.test.ts`, `service.ts`?**
+  _High betweenness centrality (0.021) - this node is a cross-community bridge._

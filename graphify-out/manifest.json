@@ -6,15 +6,15 @@
     "semantic_hash": ""
   },
   "package.json": {
-    "mtime": 1792709095.8688989,
-    "seen": 1792709127.0671291,
-    "ast_hash": "6c4ad62f96ddda907b6af49a4fe33f84",
+    "mtime": 1792750126.0194342,
+    "seen": 1792751722.3094022,
+    "ast_hash": "dc89efe41691bb3c49a52b4f24a5b75a",
     "semantic_hash": ""
   },
   "src/collectors/claude/collector.ts": {
-    "mtime": 1792706418.314428,
-    "seen": 1792707881.943881,
-    "ast_hash": "cb25c479da9a0667fcf7ef9eeb88b0b8",
+    "mtime": 1792751750.9750302,
+    "seen": 1792764169.248964,
+    "ast_hash": "745285d9231ed2e5ad94a9c6a827518d",
     "semantic_hash": ""
   },
   "src/collectors/claude/transport.ts": {
@@ -48,9 +48,9 @@
     "semantic_hash": ""
   },
   "src/discovery.ts": {
-    "mtime": 1792706477.9100623,
-    "seen": 1792707881.943886,
-    "ast_hash": "b0c4c7d5acad541183f9df1fe2cd6f06",
+    "mtime": 1792751750.9752154,
+    "seen": 1792764169.24897,
+    "ast_hash": "3838aa55d7725fadde72695e4b3f277f",
     "semantic_hash": ""
   },
   "src/domain.ts": {
@@ -72,9 +72,9 @@
     "semantic_hash": ""
   },
   "src/index.ts": {
-    "mtime": 1792709092.0856178,
-    "seen": 1792709127.0671391,
-    "ast_hash": "23e9b325a8dac9f48bce8cbf2dd14e12",
+    "mtime": 1792751750.9754322,
+    "seen": 1792764169.2489731,
+    "ast_hash": "ac419484d70ad52d8f656d767aef218e",
     "semantic_hash": ""
   },
   "src/options.ts": {
@@ -96,9 +96,9 @@
     "semantic_hash": ""
   },
   "src/service.ts": {
-    "mtime": 1792707438.8849611,
-    "seen": 1792707881.943891,
-    "ast_hash": "81bb7659789467beaa1cca3cecf45e30",
+    "mtime": 1792751750.9756835,
+    "seen": 1792764169.2489758,
+    "ast_hash": "cee6cbdd4388b4a2db716c7fcb38b5dd",
     "semantic_hash": ""
   },
   "src/tui/controller.ts": {
@@ -108,33 +108,33 @@
     "semantic_hash": ""
   },
   "src/tui/format.ts": {
-    "mtime": 1792722116.6016777,
-    "seen": 1792722131.684148,
-    "ast_hash": "04d782d64fc0683042cc4ccdbc039cc4",
+    "mtime": 1792763675.0942845,
+    "seen": 1792764169.248977,
+    "ast_hash": "857532fae43898a6dc74758e33019f6a",
     "semantic_hash": ""
   },
   "src/tui/index.tsx": {
-    "mtime": 1792722116.4253416,
-    "seen": 1792722131.684148,
-    "ast_hash": "6d1997c628f23edf4cbaa8c1546bcbb0",
+    "mtime": 1792763720.808246,
+    "seen": 1792764169.248978,
+    "ast_hash": "da3bb45ade78ff8833d32a2fcf652c18",
     "semantic_hash": ""
   },
   "src/tui/keys.ts": {
-    "mtime": 1792707643.3355603,
-    "seen": 1792707881.943893,
-    "ast_hash": "bb420ccd9cb65121cbc437627a44f298",
+    "mtime": 1792763720.8081014,
+    "seen": 1792764169.2489789,
+    "ast_hash": "06136ca7ee2a6603df9fb44ee8d555ea",
     "semantic_hash": ""
   },
   "src/tui/model.ts": {
-    "mtime": 1792707582.328876,
-    "seen": 1792707881.943894,
-    "ast_hash": "9300dbb77e3bdcdd22a023546259bed0",
+    "mtime": 1792763675.0938137,
+    "seen": 1792764169.2489789,
+    "ast_hash": "771e2504ed622124fd113756a21892cc",
     "semantic_hash": ""
   },
   "src/tui/views.tsx": {
-    "mtime": 1792707708.396019,
-    "seen": 1792707881.943895,
-    "ast_hash": "a935942fa3c8e9db7b27f66842667cb6",
+    "mtime": 1792764129.3665147,
+    "seen": 1792764169.24898,
+    "ast_hash": "9f0e4b386c68fd33a510f64ce3117010",
     "semantic_hash": ""
   },
   "test/architecture.test.ts": {
@@ -150,9 +150,9 @@
     "semantic_hash": ""
   },
   "test/claude-usage.test.ts": {
-    "mtime": 1792706596.8439999,
-    "seen": 1792707881.943896,
-    "ast_hash": "7e11914dfb39b5ced71ec9a188256093",
+    "mtime": 1792751750.9759474,
+    "seen": 1792764169.248982,
+    "ast_hash": "b503dac9b6bd1b48d426adcb56121c14",
     "semantic_hash": ""
   },
   "test/codex.test.ts": {
@@ -162,9 +162,9 @@
     "semantic_hash": ""
   },
   "test/discovery.test.ts": {
-    "mtime": 1792707424.953377,
-    "seen": 1792707881.943897,
-    "ast_hash": "0bc83a984550af1b59ede9b47b07c080",
+    "mtime": 1792751750.9761438,
+    "seen": 1792764169.248984,
+    "ast_hash": "8bdeeafb809b2d5fc41c95123587a8f4",
     "semantic_hash": ""
   },
   "test/fixtures-sanitized.test.ts": {
@@ -198,9 +198,9 @@
     "semantic_hash": ""
   },
   "test/server-plugin.test.ts": {
-    "mtime": 1792707819.6267724,
-    "seen": 1792707881.9438999,
-    "ast_hash": "a8cfa9cb960cd2c87fe824a80208599b",
+    "mtime": 1792751750.9764433,
+    "seen": 1792764169.248988,
+    "ast_hash": "22910534f5e433f26fd1e8a9c70051ec",
     "semantic_hash": ""
   },
   "test/service-harness.ts": {
@@ -210,9 +210,9 @@
     "semantic_hash": ""
   },
   "test/service.test.ts": {
-    "mtime": 1792707866.8159204,
-    "seen": 1792707881.943902,
-    "ast_hash": "4214c954edbaf8de26e42abc67bb19a7",
+    "mtime": 1792751750.9767992,
+    "seen": 1792764169.2489889,
+    "ast_hash": "2263ffb4c03b083e1283ee091deec477",
     "semantic_hash": ""
   },
   "test/tui-controller.test.ts": {
@@ -222,9 +222,9 @@
     "semantic_hash": ""
   },
   "test/tui-format.test.ts": {
-    "mtime": 1792707708.3963394,
-    "seen": 1792707881.943903,
-    "ast_hash": "0117808a42ca87e90a331d0f54b124f1",
+    "mtime": 1792763675.0949695,
+    "seen": 1792764169.248991,
+    "ast_hash": "6bacec80731c067e7257c93372c23503",
     "semantic_hash": ""
   },
   "test/tui-helpers.ts": {
@@ -234,27 +234,27 @@
     "semantic_hash": ""
   },
   "test/tui-keys.test.ts": {
-    "mtime": 1792707685.230352,
-    "seen": 1792707881.943904,
-    "ast_hash": "b8c752001e781135bbed3479d95c3543",
+    "mtime": 1792763767.6726756,
+    "seen": 1792764169.248992,
+    "ast_hash": "cb4b673c4c8969aca1f52eb1c1c22a9a",
     "semantic_hash": ""
   },
   "test/tui-model.test.ts": {
-    "mtime": 1792707685.224719,
-    "seen": 1792707881.943904,
-    "ast_hash": "fec344741c3c01635d9f448288b7b511",
+    "mtime": 1792763767.6723301,
+    "seen": 1792764169.248993,
+    "ast_hash": "626078c0ed20b5c99dccb84c9fc609d0",
     "semantic_hash": ""
   },
   "test/tui-plugin.test.tsx": {
-    "mtime": 1792711789.6917367,
-    "seen": 1792722131.684164,
-    "ast_hash": "53859096dd7ad6b67fee9c6024ff3fa6",
+    "mtime": 1792763899.255693,
+    "seen": 1792764169.248993,
+    "ast_hash": "127c768fcde6b60313a721522db79766",
     "semantic_hash": ""
   },
   "test/tui-render.test.tsx": {
-    "mtime": 1792707759.7014277,
-    "seen": 1792707881.943906,
-    "ast_hash": "f7f5eee917b9c07791d3b690eaef0a05",
+    "mtime": 1792764129.3667004,
+    "seen": 1792764169.248994,
+    "ast_hash": "f27802e0e4eedf350ea74a55fa00d15b",
     "semantic_hash": ""
   },
   "tsconfig.json": {
@@ -330,9 +330,9 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1792709117.2102458,
-    "seen": 1792709127.067174,
-    "ast_hash": "1cc6b0bff4e671c8ef3237463dc32319",
+    "mtime": 1792764044.2421253,
+    "seen": 1792764169.249012,
+    "ast_hash": "b926721b4eb7dec185b60be577783052",
     "semantic_hash": ""
   },
   "openspec/config.yaml": {
@@ -414,32 +414,32 @@
     "semantic_hash": ""
   },
   "openspec/changes/rename-to-quotabar-and-add-publish-workflow/.openspec.yaml": {
-    "mtime": 1792708934.7562275,
-    "seen": 1792709127.067179,
+    "mtime": 1792751139.2568204,
+    "seen": 1792751722.3094559,
     "ast_hash": "db874330e3bdf09469eb2e2124cebd99",
     "semantic_hash": ""
   },
   "openspec/changes/rename-to-quotabar-and-add-publish-workflow/design.md": {
-    "mtime": 1792708988.2829514,
-    "seen": 1792709127.06718,
+    "mtime": 1792751139.2570255,
+    "seen": 1792751722.3094559,
     "ast_hash": "4b0dc574fe30c59e7041c7fa72dcab10",
     "semantic_hash": ""
   },
   "openspec/changes/rename-to-quotabar-and-add-publish-workflow/proposal.md": {
-    "mtime": 1792708949.356356,
-    "seen": 1792709127.06718,
+    "mtime": 1792751139.2571695,
+    "seen": 1792751722.3094568,
     "ast_hash": "cc1c372ecdcb51add237194e37edaaac",
     "semantic_hash": ""
   },
   "openspec/changes/rename-to-quotabar-and-add-publish-workflow/specs/package-release-publishing/spec.md": {
-    "mtime": 1792708988.3622627,
-    "seen": 1792709127.067181,
+    "mtime": 1792751139.2576005,
+    "seen": 1792751722.309458,
     "ast_hash": "286c1210d9adaf27e868b5cd97f481e5",
     "semantic_hash": ""
   },
   "openspec/changes/rename-to-quotabar-and-add-publish-workflow/tasks.md": {
-    "mtime": 1792709127.1171849,
-    "seen": 1792722131.684191,
+    "mtime": 1792751139.2578669,
+    "seen": 1792751722.309458,
     "ast_hash": "174399c77cd07d47e5fe0b0135d038d3",
     "semantic_hash": ""
   },
@@ -450,51 +450,135 @@
     "semantic_hash": ""
   },
   "openspec/specs/quota-visibility-and-diagnostics/spec.md": {
-    "mtime": 1792708449.4306488,
-    "seen": 1792709127.0671842,
-    "ast_hash": "368ee58e631ccf156809e4a40ee465d4",
+    "mtime": 1792750883.5220966,
+    "seen": 1792751722.3094652,
+    "ast_hash": "73222bff460a018d5d77d22ef8e3e779",
     "semantic_hash": ""
   },
   "openspec/specs/subscription-quota-collection/spec.md": {
-    "mtime": 1792708449.4310064,
-    "seen": 1792709127.0671842,
-    "ast_hash": "e733592315e75c8fc1d9df16000079fb",
+    "mtime": 1792762158.4623327,
+    "seen": 1792764169.249033,
+    "ast_hash": "cae1b0f3580ae903b1b89083924f195f",
     "semantic_hash": ""
   },
   ".beans/opencode-sidebar-quota-usage-1mxh--fix-footer-crash-when-current-provider-has-no-quot.md": {
-    "mtime": 1792721942.754785,
-    "seen": 1792722131.6841679,
-    "ast_hash": "0cae87fcfb42b3fecbc82231a7bb92b7",
+    "mtime": 1792750883.510119,
+    "seen": 1792751722.309435,
+    "ast_hash": "fc6dfe7bffe5eb71ebe27e6a1050a381",
     "semantic_hash": ""
   },
-  "openspec/changes/fix-footer-crash-without-current-row/.openspec.yaml": {
-    "mtime": 1792721942.7551403,
-    "seen": 1792722131.684185,
+  ".beans/opencode-sidebar-quota-usage-uc67--show-claude-quota-when-anthropic-is-served-by-a-pr.md": {
+    "mtime": 1792751750.9736893,
+    "seen": 1792764169.249003,
+    "ast_hash": "3432cb67caad1f6b56e5ea930a6fa1ef",
+    "semantic_hash": ""
+  },
+  "openspec/changes/archive/2026-10-22-fix-footer-crash-without-current-row/.openspec.yaml": {
+    "mtime": 1792750929.228108,
+    "seen": 1792751722.309452,
     "ast_hash": "db874330e3bdf09469eb2e2124cebd99",
     "semantic_hash": ""
   },
-  "openspec/changes/fix-footer-crash-without-current-row/design.md": {
-    "mtime": 1792721942.75534,
-    "seen": 1792722131.684185,
-    "ast_hash": "eed42ab9059b3b0ee95352f096daddb3",
+  "openspec/changes/archive/2026-10-22-fix-footer-crash-without-current-row/design.md": {
+    "mtime": 1792750929.228492,
+    "seen": 1792751722.309453,
+    "ast_hash": "ca151e6917737ce94596ac92e569556e",
     "semantic_hash": ""
   },
-  "openspec/changes/fix-footer-crash-without-current-row/proposal.md": {
-    "mtime": 1792721942.7555363,
-    "seen": 1792722131.6841862,
+  "openspec/changes/archive/2026-10-22-fix-footer-crash-without-current-row/proposal.md": {
+    "mtime": 1792750929.2287621,
+    "seen": 1792751722.309454,
     "ast_hash": "bfa514652b53464cc213585d724b5f49",
     "semantic_hash": ""
   },
-  "openspec/changes/fix-footer-crash-without-current-row/specs/quota-visibility-and-diagnostics/spec.md": {
-    "mtime": 1792721942.7558544,
-    "seen": 1792722131.684187,
+  "openspec/changes/archive/2026-10-22-fix-footer-crash-without-current-row/specs/quota-visibility-and-diagnostics/spec.md": {
+    "mtime": 1792750929.2292347,
+    "seen": 1792751722.309454,
     "ast_hash": "81929a2af6de1c37a7b97670b0a9bc13",
     "semantic_hash": ""
   },
-  "openspec/changes/fix-footer-crash-without-current-row/tasks.md": {
-    "mtime": 1792721942.7559924,
-    "seen": 1792722131.684187,
-    "ast_hash": "5d3def0e8ac79a0594df5006906f32cd",
+  "openspec/changes/archive/2026-10-22-fix-footer-crash-without-current-row/tasks.md": {
+    "mtime": 1792750929.2294781,
+    "seen": 1792751722.3094552,
+    "ast_hash": "9bd011f0d0539ec6e9f8786884d91ba3",
+    "semantic_hash": ""
+  },
+  ".beans/opencode-sidebar-quota-usage-nit9--clarify-npm-trusted-publisher-settings.md": {
+    "mtime": 1792763087.7899246,
+    "seen": 1792764169.2489989,
+    "ast_hash": "c994c332e2ce4eb75d1bfbf9e7c59f13",
+    "semantic_hash": ""
+  },
+  ".beans/opencode-sidebar-quota-usage-nxql--implement-compact-quota-display.md": {
+    "mtime": 1792764140.4711082,
+    "seen": 1792764169.2489998,
+    "ast_hash": "08dda545054bad891165250760f29340",
+    "semantic_hash": ""
+  },
+  ".beans/opencode-sidebar-quota-usage-u2w0--propose-compact-quota-ui-and-global-usage-display.md": {
+    "mtime": 1792763142.6818037,
+    "seen": 1792764169.249002,
+    "ast_hash": "08a1b38e90fde86e11f57464912944d3",
+    "semantic_hash": ""
+  },
+  "openspec/changes/archive/2026-10-23-show-claude-quota-for-anthropic-provider/.openspec.yaml": {
+    "mtime": 1792751750.9739249,
+    "seen": 1792764169.2490208,
+    "ast_hash": "4a33b58f0c8a77f25b6316ea945adf72",
+    "semantic_hash": ""
+  },
+  "openspec/changes/archive/2026-10-23-show-claude-quota-for-anthropic-provider/design.md": {
+    "mtime": 1792751750.9741173,
+    "seen": 1792764169.249022,
+    "ast_hash": "801fab472d636f20f50c18216037c5d2",
+    "semantic_hash": ""
+  },
+  "openspec/changes/archive/2026-10-23-show-claude-quota-for-anthropic-provider/proposal.md": {
+    "mtime": 1792751750.9742727,
+    "seen": 1792764169.249023,
+    "ast_hash": "5c4b27b2a7cb31064ef3652e6df4392c",
+    "semantic_hash": ""
+  },
+  "openspec/changes/archive/2026-10-23-show-claude-quota-for-anthropic-provider/specs/subscription-quota-collection/spec.md": {
+    "mtime": 1792751750.9745853,
+    "seen": 1792764169.249023,
+    "ast_hash": "3805ce13402f6fdb69d0d6f20bc866c1",
+    "semantic_hash": ""
+  },
+  "openspec/changes/archive/2026-10-23-show-claude-quota-for-anthropic-provider/tasks.md": {
+    "mtime": 1792751750.9747705,
+    "seen": 1792764169.249024,
+    "ast_hash": "9365bebad003976aebc30d6fa1c7601b",
+    "semantic_hash": ""
+  },
+  "openspec/changes/compact-quota-display/.openspec.yaml": {
+    "mtime": 1792762938.957295,
+    "seen": 1792764169.249024,
+    "ast_hash": "4a33b58f0c8a77f25b6316ea945adf72",
+    "semantic_hash": ""
+  },
+  "openspec/changes/compact-quota-display/design.md": {
+    "mtime": 1792763080.3977427,
+    "seen": 1792764169.249025,
+    "ast_hash": "38b15e842db328b9d79db316747d06c7",
+    "semantic_hash": ""
+  },
+  "openspec/changes/compact-quota-display/proposal.md": {
+    "mtime": 1792762970.0785093,
+    "seen": 1792764169.249026,
+    "ast_hash": "66afb821f9c88ef1cb2744e149beb16c",
+    "semantic_hash": ""
+  },
+  "openspec/changes/compact-quota-display/specs/quota-visibility-and-diagnostics/spec.md": {
+    "mtime": 1792763080.3981702,
+    "seen": 1792764169.249026,
+    "ast_hash": "afb22e196a831843b26f97e0cf65805b",
+    "semantic_hash": ""
+  },
+  "openspec/changes/compact-quota-display/tasks.md": {
+    "mtime": 1792764159.4949212,
+    "seen": 1792764169.249027,
+    "ast_hash": "787190f2989401474c9c6d3268701c32",
     "semantic_hash": ""
   }
 }

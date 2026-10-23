@@ -7,7 +7,7 @@ import { QuotaRpc } from "../rpc.ts"
 import { QuotaController, type ControllerState, type QuotaPort } from "./controller.ts"
 import { formatRemaining, headline } from "./format.ts"
 import { detailsCommands } from "./keys.ts"
-import { chooseSlashName, DEFAULT_PREFS, isHidden, orderRows, toggle, type Prefs } from "./model.ts"
+import { chooseSlashName, DEFAULT_PREFS, displayMode, isHidden, orderRows, toggle, type Prefs } from "./model.ts"
 import { DetailsView, SidebarView, type Palette } from "./views.tsx"
 
 const SYNC_MS = 30_000
@@ -32,6 +32,7 @@ export default Plugin.define({
     const [prefs, updatePrefs] = ctx.storage.store<Prefs>("preferences", { initial: DEFAULT_PREFS })
     const save = (mutation: (draft: Prefs) => void) =>
       void updatePrefs(mutation).catch(() => ctx.ui.toast.show({ message: "Could not save quota preferences", variant: "error" }))
+    const toggleDisplayMode = () => save(draft => void (draft.displayMode = displayMode(draft) === "remaining" ? "used" : "remaining"))
 
     const palette = (theme: typeof ctx.theme = ctx.theme): Palette => ({
       base: theme.text.base,
@@ -60,6 +61,7 @@ export default Plugin.define({
         select: id => setSelected(id),
         refresh: id => void controller.sync(true, id as SupportedIntegration | undefined),
         toggleHidden: id => save(draft => void (draft.hidden = toggle(draft.hidden, id))),
+        toggleDisplayMode,
         close: () => ctx.ui.dialog.clear(),
       })
       ctx.keymap.layer(() => ({ mode: "global", commands: commands.map(({ bind, title, run }) => ({ bind, title, run })) }))
@@ -78,6 +80,7 @@ export default Plugin.define({
             onSelect={setSelected}
             onRefresh={id => void controller.sync(true, id as SupportedIntegration | undefined)}
             onToggleHidden={id => save(draft => void (draft.hidden = toggle(draft.hidden, id)))}
+            onToggleDisplayMode={toggleDisplayMode}
             onClose={() => ctx.ui.dialog.clear()}
           />
         </scrollbox>

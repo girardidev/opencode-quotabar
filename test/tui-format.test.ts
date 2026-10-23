@@ -1,8 +1,28 @@
 import { describe, expect, test } from "bun:test"
-import { formatAge, formatDuration, formatPercent, formatRemaining, formatReset, formatShort, headline, statusText } from "../src/tui/format.ts"
+import { displayPercent, formatAge, formatAllowance, formatCompactReset, formatDuration, formatPercent, formatRemaining, formatReset, formatShort, headline, statusText } from "../src/tui/format.ts"
 import { HOUR, NOW, codex, row, win } from "./tui-helpers.ts"
 
 describe("format", () => {
+  test("allowance direction converts before rounding and leaves snapshots unchanged", () => {
+    for (const [remaining, used] of [[80, "20%"], [99.6, "<1%"], [0.4, "99%"], [0, "100%"], [100, "0%"]] as const) {
+      const window = Object.freeze(win({ remaining }))
+      expect(formatAllowance(window, "used")).toBe(used)
+      expect(formatAllowance(window, "remaining")).toBe(formatPercent(remaining))
+      expect(displayPercent(window, "used")).toBe(100 - remaining)
+      expect(window.remaining).toBe(remaining)
+    }
+    expect(formatAllowance(win({ remaining: undefined }), "used")).toBe("unknown")
+    expect(displayPercent(win({ remaining: undefined }), "used")).toBeUndefined()
+  })
+
+  test("compact resets retain precision and unknown/pending states", () => {
+    expect(formatCompactReset(NOW + HOUR + 8 * 60_000, NOW)).toBe("1h 8m")
+    expect(formatCompactReset(NOW + 160 * HOUR, NOW)).toBe("6d 16h")
+    expect(formatCompactReset(NOW + HOUR, NOW, true)).toBe("1h")
+    expect(formatCompactReset(undefined, NOW)).toBe("reset time unknown")
+    expect(formatCompactReset(NOW, NOW)).toBe("reset pending refresh")
+  })
+
   test("percent never rounds used quota up to 100 or remaining quota down to 0", () => {
     expect(formatPercent(78)).toBe("78%")
     expect(formatPercent(0)).toBe("0%")

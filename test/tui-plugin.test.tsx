@@ -2,6 +2,7 @@
 import { afterEach, describe, expect, test } from "bun:test"
 import { testRender } from "@opentui/solid"
 import { batch, createSignal } from "solid-js"
+import { createStore, produce } from "solid-js/store"
 import plugin from "../src/tui/index.tsx"
 import { QuotaRpc } from "../src/rpc.ts"
 import { codex, row, snapshot } from "./tui-helpers.ts"
@@ -17,14 +18,15 @@ interface Slot {
   render: () => unknown
 }
 
-function fakeCtx(options: { takenSlash?: string; snapshotValue?: unknown; failing?: boolean; providerID?: string | undefined } = {}) {
+function fakeCtx(options: { takenSlash?: string; snapshotValue?: unknown; failing?: boolean; providerID?: string | undefined; preferences?: object; saveFailure?: boolean } = {}) {
   // Reactive like the real host: the footer must follow model changes after mount.
   const [providerID, setProviderID] = createSignal<string | undefined>("providerID" in options ? options.providerID : "claude-code")
-  const calls = { snapshot: [] as unknown[], refresh: [] as unknown[], disposed: [] as string[], layers: [] as Array<() => any>, saved: 0 }
+  const calls = { snapshot: [] as unknown[], refresh: [] as unknown[], disposed: [] as string[], layers: [] as Array<() => any>, toasts: [] as unknown[], saved: 0 }
   const slots: Slot[] = []
   let updated: ((event: any) => void) | undefined
   let reconnect: (() => void) | undefined
-  const prefs: any = { hidden: [], closed: [], collapsed: false }
+  const [prefs, setPrefs] = createStore<any>({})
+  let dialog: (() => any) | undefined
   const rpc = {
     snapshot: async (input: unknown, opts: unknown) => {
       calls.snapshot.push({ input, opts })
@@ -48,22 +50,26 @@ function fakeCtx(options: { takenSlash?: string; snapshotValue?: unknown; failin
     },
     storage: {
       store: (_key: string, opt: { initial: object }) => {
-        Object.assign(prefs, structuredClone(opt.initial))
-        return [prefs, async (mutate: (draft: any) => void) => (mutate(prefs), void calls.saved++)]
+        setPrefs(structuredClone(options.preferences ?? opt.initial))
+        return [prefs, async (mutate: (draft: any) => void) => {
+          if (options.saveFailure) throw new Error("storage unavailable")
+          setPrefs(produce(mutate))
+          calls.saved++
+        }]
       },
     },
     ui: {
       slot: (claim: Slot) => (slots.push(claim), () => void calls.disposed.push(claim.append!)),
       model: { current: () => (providerID() ? { providerID: providerID()!, modelID: "x" } : undefined) },
-      dialog: { set: () => {}, show: () => {}, clear: () => {} },
-      toast: { show: () => {} },
+      dialog: { set: () => {}, show: (node: () => any) => { dialog = node }, clear: () => { dialog = undefined } },
+      toast: { show: (toast: unknown) => void calls.toasts.push(toast) },
     },
     keymap: {
       layer: (factory: () => any) => void calls.layers.push(factory),
       commands: () => (options.takenSlash ? [{ slash: { name: options.takenSlash } }] : []),
     },
   }
-  return { ctx, calls, slots, prefs, location, setProviderID, emitUpdate: (data: unknown, directory = "/work") => updated?.({ data, location: { directory } }), reconnect: () => reconnect?.() }
+  return { ctx, calls, slots, prefs, setPrefs, get dialog() { return dialog }, location, setProviderID, emitUpdate: (data: unknown, directory = "/work") => updated?.({ data, location: { directory } }), reconnect: () => reconnect?.() }
 }
 
 const open: Array<{ dispose(): Promise<void> }> = []
@@ -74,6 +80,94 @@ const commands = (calls: ReturnType<typeof fakeCtx>["calls"]) => calls.layers.fl
 const settle = () => new Promise(resolve => setTimeout(resolve, 20))
 
 describe("tui plugin", () => {
+  test("display mode updates both surfaces without refreshing, persists, and leaves the footer remaining", async () => {
+    const host = fakeCtx({ preferences: { hidden: [], closed: [], collapsed: false } })
+    const cleanup = (await plugin.setup(host.ctx)) as () => void
+    await settle()
+    const sidebar = await testRender(() => host.slots[0]!.render() as any, { width: 38, height: 30 })
+    open.push(sidebar)
+    commands(host.calls).find(c => c.id === "opencode-quotabar.open").run()
+    const details = await testRender(() => host.dialog!(), { width: 90, height: 90 })
+    open.push(details)
+    await settle()
+    await sidebar.renderOnce()
+    await details.renderOnce()
+    expect(sidebar.captureCharFrame()).toContain("84%")
+    expect(details.captureCharFrame()).toContain("Display: Remaining")
+    const snapshots = host.calls.snapshot.length
+    const refreshes = host.calls.refresh.length
+    commands(host.calls).findLast(c => c.bind === "u").run()
+    await sidebar.renderOnce()
+    await details.renderOnce()
+    expect(sidebar.captureCharFrame()).toContain("16%")
+    expect(details.captureCharFrame()).toContain("Display: Used")
+    expect(details.captureCharFrame()).toContain("shown as used.")
+    expect(details.captureCharFrame()).toContain("22%")
+    expect(host.calls.snapshot).toHaveLength(snapshots)
+    expect(host.calls.refresh).toHaveLength(refreshes)
+    expect(host.prefs.displayMode).toBe("used")
+
+    const footer = await testRender(() => host.slots[1]!.render() as any, { width: 60, height: 3 })
+    open.push(footer)
+    await footer.renderOnce()
+    expect(footer.captureCharFrame()).toContain("Weekly 78% left")
+
+    commands(host.calls).findLast(c => c.bind === "escape").run()
+    await details.dispose()
+    commands(host.calls).find(c => c.id === "opencode-quotabar.open").run()
+    const reopened = await testRender(() => host.dialog!(), { width: 90, height: 90 })
+    open.push(reopened)
+    await reopened.renderOnce()
+    expect(reopened.captureCharFrame()).toContain("Display: Used")
+    const preferences = JSON.parse(JSON.stringify(host.prefs))
+    cleanup()
+
+    const restarted = fakeCtx({ preferences })
+    const stop = (await plugin.setup(restarted.ctx)) as () => void
+    await settle()
+    const restored = await testRender(() => restarted.slots[0]!.render() as any, { width: 38, height: 30 })
+    open.push(restored)
+    await restored.renderOnce()
+    expect(restored.captureCharFrame()).toContain("16%")
+    expect(restarted.prefs.displayMode).toBe("used")
+    stop()
+  })
+
+  test("clicking the mode control works without providers and preserves legacy preferences", async () => {
+    const legacy = { hidden: ["openai"], closed: ["claude-code"], collapsed: true, displayMode: "invalid" }
+    const host = fakeCtx({ preferences: legacy, snapshotValue: snapshot() })
+    const cleanup = (await plugin.setup(host.ctx)) as () => void
+    commands(host.calls).find(c => c.id === "opencode-quotabar.open").run()
+    const setup = await testRender(() => host.dialog!(), { width: 80, height: 30 })
+    open.push(setup)
+    await settle()
+    await setup.renderOnce()
+    expect(setup.captureCharFrame()).toContain("Display: Remaining")
+    const lines = setup.captureCharFrame().split("\n")
+    const y = lines.findIndex(line => line.includes("Display: Remaining"))
+    await setup.mockMouse.click(lines[y]!.indexOf("Display:") + 1, y)
+    await setup.renderOnce()
+    expect(setup.captureCharFrame()).toContain("Display: Used")
+    expect(host.prefs).toEqual({ ...legacy, displayMode: "used" })
+    commands(host.calls).findLast(c => c.bind === "u").run()
+    await setup.renderOnce()
+    expect(setup.captureCharFrame()).toContain("Display: Remaining")
+    cleanup()
+  })
+
+  test("failed display preference saves use the existing error feedback", async () => {
+    const host = fakeCtx({ saveFailure: true })
+    const cleanup = (await plugin.setup(host.ctx)) as () => void
+    commands(host.calls).find(c => c.id === "opencode-quotabar.open").run()
+    const setup = await testRender(() => host.dialog!(), { width: 80, height: 30 })
+    open.push(setup)
+    commands(host.calls).findLast(c => c.bind === "u").run()
+    await settle()
+    expect(host.calls.toasts).toEqual([{ message: "Could not save quota preferences", variant: "error" }])
+    expect(host.prefs.displayMode).toBe("remaining")
+    cleanup()
+  })
+
   test("registers sidebar and footer slots and fetches the snapshot for its own location", async () => {
     const host = fakeCtx()
     const cleanup = (await plugin.setup(host.ctx)) as () => void
@@ -181,7 +275,7 @@ describe("tui plugin", () => {
   test("the footer stays empty when the current provider's row is hidden", async () => {
     const host = fakeCtx()
     const cleanup = (await plugin.setup(host.ctx)) as () => void
-    host.prefs.hidden = ["claude-code"] // set after setup: the store seeds its initial value on mount
+    host.setPrefs("hidden", ["claude-code"])
     await settle()
     const setup = await testRender(() => host.slots[1]!.render() as any, { width: 60, height: 3 })
     open.push(setup)
@@ -211,7 +305,7 @@ describe("tui plugin", () => {
     expect(host.calls.refresh).toHaveLength(1)
     all.find(c => c.id === "opencode-quotabar.toggle").run()
     expect(host.prefs.collapsed).toBe(true)
-    expect(Object.keys(host.prefs).sort()).toEqual(["closed", "collapsed", "hidden"])
+    expect(Object.keys(host.prefs).sort()).toEqual(["closed", "collapsed", "displayMode", "hidden"])
     cleanup()
   })
 

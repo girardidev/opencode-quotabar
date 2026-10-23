@@ -1,5 +1,7 @@
 import type { QuotaRow, QuotaSnapshot } from "../domain.ts"
 
+export type DisplayMode = "remaining" | "used"
+
 /** Presentation preferences only; never credentials, diagnostics or readings. */
 export interface Prefs {
   /** Row ids hidden from the sidebar by the user. */
@@ -7,9 +9,13 @@ export interface Prefs {
   /** Row ids collapsed to a one-line summary. */
   closed: string[]
   collapsed: boolean
+  displayMode: DisplayMode
 }
 
-export const DEFAULT_PREFS: Prefs = { hidden: [], closed: [], collapsed: false }
+export const DEFAULT_PREFS: Prefs = { hidden: [], closed: [], collapsed: false, displayMode: "remaining" }
+
+/** Old persisted stores may omit new defaults; invalid values also mean remaining. */
+export const displayMode = (prefs: { displayMode?: unknown }): DisplayMode => prefs.displayMode === "used" ? "used" : "remaining"
 
 export type ServiceStatus = "connecting" | "ok" | "unavailable" | "incompatible"
 

@@ -10,6 +10,7 @@ function api(ids: string[], selected?: string) {
     select: id => ((current = id), void calls.push(`select:${id}`)),
     refresh: id => void calls.push(`refresh:${id ?? "all"}`),
     toggleHidden: id => void calls.push(`hide:${id}`),
+    toggleDisplayMode: () => void calls.push("display"),
     close: () => void calls.push("close"),
   })
   const press = (key: string) => commands.filter(c => c.bind === key).forEach(c => c.run())
@@ -19,7 +20,7 @@ function api(ids: string[], selected?: string) {
 describe("details keyboard", () => {
   test("every action is reachable from the keyboard", () => {
     const { commands } = api(["a", "b"])
-    expect(commands.map(c => c.bind)).toEqual(["escape", "down", "j", "up", "k", "return", "r", "h"])
+    expect(commands.map(c => c.bind)).toEqual(["escape", "down", "j", "up", "k", "return", "r", "h", "u"])
   })
 
   test("navigation wraps in both directions", () => {
@@ -47,5 +48,7 @@ describe("details keyboard", () => {
     press("return")
     press("h")
     expect(calls).toEqual([])
+    press("u")
+    expect(calls).toEqual(["display"])
   })
 })

@@ -1,4 +1,5 @@
 import type { DiagnosticCode, QuotaRow, QuotaWindow } from "../domain.ts"
+import type { DisplayMode } from "./model.ts"
 
 /** Whole-number remaining percent that never rounds a used quota up to 100% or an available one down to 0%. */
 export function formatPercent(value: number): string {
@@ -10,6 +11,17 @@ export function formatPercent(value: number): string {
 
 export function formatRemaining(window: QuotaWindow): string {
   return window.remaining === undefined ? "unknown" : `${formatPercent(window.remaining)} left`
+}
+
+/** Convert before rounding, without mutating the provider's canonical remaining value. */
+export function displayPercent(window: QuotaWindow, mode: DisplayMode): number | undefined {
+  if (window.remaining === undefined) return undefined
+  return mode === "used" ? 100 - window.remaining : window.remaining
+}
+
+export function formatAllowance(window: QuotaWindow, mode: DisplayMode): string {
+  const value = displayPercent(window, mode)
+  return value === undefined ? "unknown" : formatPercent(value)
 }
 
 export function formatDuration(ms: number): string {
@@ -34,6 +46,11 @@ export function formatReset(resetsAt: number | undefined, now: number, short = f
   if (resetsAt <= now) return "reset pending refresh"
   const left = resetsAt - now
   return `resets in ${short ? formatShort(left) : formatDuration(left)}`
+}
+
+/** Omit only the countdown prefix; unknown and pending deadlines remain explicit. */
+export function formatCompactReset(resetsAt: number | undefined, now: number, short = false): string {
+  return formatReset(resetsAt, now, short).replace(/^resets in /, "")
 }
 
 export function formatAge(timestamp: number | undefined, now: number): string {

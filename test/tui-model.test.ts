@@ -1,8 +1,18 @@
 import { describe, expect, test } from "bun:test"
-import { banner, chooseSlashName, isHidden, orderRows, sidebarRows, toggle } from "../src/tui/model.ts"
+import { banner, chooseSlashName, DEFAULT_PREFS, displayMode, isHidden, orderRows, sidebarRows, toggle } from "../src/tui/model.ts"
 import { codex, prefs, row, snapshot } from "./tui-helpers.ts"
 
 describe("model", () => {
+  test("display mode defaults safely without changing legacy preferences", () => {
+    const legacy: Omit<typeof DEFAULT_PREFS, "displayMode"> & { displayMode?: unknown } = { hidden: ["openai"], closed: ["claude-code"], collapsed: true }
+    const before = structuredClone(legacy)
+    expect(displayMode(legacy)).toBe("remaining")
+    expect(displayMode({ displayMode: "invalid" })).toBe("remaining")
+    expect(displayMode(DEFAULT_PREFS)).toBe("remaining")
+    expect(displayMode({ displayMode: "used" })).toBe("used")
+    expect(legacy).toEqual(before)
+  })
+
   test("current provider first, server order otherwise", () => {
     const rows = [codex(), row()]
     expect(orderRows(rows, "claude-code").map(r => r.id)).toEqual(["claude-code", "openai"])

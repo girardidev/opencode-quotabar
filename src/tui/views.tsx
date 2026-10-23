@@ -2,8 +2,8 @@
 import type { ColorInput } from "@opentui/core"
 import { For, Show } from "solid-js"
 import type { QuotaRow, QuotaSnapshot, QuotaWindow } from "../domain.ts"
-import { CODE_LABEL, formatAge, formatDuration, formatRemaining, formatReset, headline, planText, sourceText, statusText } from "./format.ts"
-import { banner, isClosed, isHidden, orderRows, sidebarRows, type Prefs, type ServiceStatus } from "./model.ts"
+import { CODE_LABEL, displayPercent, formatAge, formatAllowance, formatCompactReset, formatDuration, headline, planText, sourceText, statusText } from "./format.ts"
+import { banner, displayMode, isClosed, isHidden, orderRows, sidebarRows, type DisplayMode, type Prefs, type ServiceStatus } from "./model.ts"
 
 /** Semantic colors resolved from the host theme. */
 export interface Palette {
@@ -41,8 +41,8 @@ function rowGlyph(row: QuotaRow, offline: boolean): { glyph: string; color: keyo
 }
 
 /** Proportional meter that fits any container width. Unknown values render no bar at all. */
-function Meter(props: { window: QuotaWindow; palette: Palette }) {
-  const filled = () => Math.max(0, Math.min(100, Math.round(props.window.remaining ?? 0)))
+function Meter(props: { window: QuotaWindow; palette: Palette; mode: DisplayMode }) {
+  const filled = () => Math.max(0, Math.min(100, Math.round(displayPercent(props.window, props.mode) ?? 0)))
   return (
     <Show when={props.window.remaining !== undefined}>
       <box height={1} flexDirection="row">
@@ -57,22 +57,22 @@ function Meter(props: { window: QuotaWindow; palette: Palette }) {
   )
 }
 
-export function WindowBlock(props: { window: QuotaWindow; now: number; palette: Palette; showBar: boolean }) {
+export function WindowBlock(props: { window: QuotaWindow; now: number; palette: Palette; showBar: boolean; mode: DisplayMode }) {
   return (
-    <box flexDirection="column">
-      <box flexDirection="row" justifyContent="space-between" gap={1}>
-        <text fg={props.palette.base}>
+    <box flexDirection="column" flexShrink={0}>
+      <box flexDirection="row" flexWrap="wrap" justifyContent="space-between" columnGap={1}>
+        <text fg={props.palette.base} flexGrow={1} flexShrink={0} minWidth={0} maxWidth="100%" wrapMode="word">
           {props.window.label}
           <Show when={props.window.active}>
             <span style={{ fg: props.palette.muted }}>{" ★"}</span>
           </Show>
+          <span style={{ fg: props.palette.muted }}>{` · ${formatCompactReset(props.window.resetsAt, props.now)}`}</span>
         </text>
-        <text fg={windowColor(props.window, props.palette)}>{formatRemaining(props.window)}</text>
+        <text fg={windowColor(props.window, props.palette)} flexShrink={0}>{formatAllowance(props.window, props.mode)}</text>
       </box>
       <Show when={props.showBar}>
-        <Meter window={props.window} palette={props.palette} />
+        <Meter window={props.window} palette={props.palette} mode={props.mode} />
       </Show>
-      <text fg={props.palette.muted}>{formatReset(props.window.resetsAt, props.now)}</text>
     </box>
   )
 }
@@ -102,11 +102,11 @@ export function SidebarView(props: SidebarProps) {
   const message = () => banner(props.status)
   return (
     <box flexDirection="column" marginTop={1}>
-      <box flexDirection="row" justifyContent="space-between">
-        <text fg={props.palette.base} onMouseDown={() => props.onToggleCollapsed()}>
+      <box flexDirection="row" flexWrap="wrap" justifyContent="space-between">
+        <text fg={props.palette.base} flexShrink={0} maxWidth="100%" onMouseDown={() => props.onToggleCollapsed()}>
           <b>{props.prefs.collapsed ? "▸" : "▾"} Subscription quota</b>
         </text>
-        <text fg={props.palette.muted} onMouseUp={(event: { stopPropagation(): void }) => (event.stopPropagation(), props.onOpenDetails())}>
+        <text fg={props.palette.muted} flexShrink={0} onMouseUp={(event: { stopPropagation(): void }) => (event.stopPropagation(), props.onOpenDetails())}>
           {"details"}
         </text>
       </box>
@@ -143,14 +143,14 @@ function SidebarRow(props: SidebarProps & { row: QuotaRow; offline: boolean; cur
         <span style={{ fg: props.palette.muted }}>{closed() ? " ▸" : " ▾"}</span>
         <Show when={closed()}>
           <span style={{ fg: props.palette.muted }}>
-            {top() ? ` ${top()!.label} ${formatRemaining(top()!)}${top()!.resetsAt ? ` · ${formatReset(top()!.resetsAt, props.now, true).replace("resets in ", "")}` : ""}` : status() ? ` ${status()}` : ""}
+            {top() ? ` ${top()!.label} ${formatAllowance(top()!, displayMode(props.prefs))}${top()!.resetsAt ? ` · ${formatCompactReset(top()!.resetsAt, props.now, true)}` : ""}` : status() ? ` ${status()}` : ""}
           </span>
         </Show>
       </text>
       <Show when={!closed()}>
         <box flexDirection="column" paddingLeft={2}>
           <For each={props.row.windows}>
-            {window => <WindowBlock window={window} now={props.now} palette={props.palette} showBar={bars()} />}
+            {window => <WindowBlock window={window} now={props.now} palette={props.palette} showBar={bars()} mode={displayMode(props.prefs)} />}
           </For>
           <Show when={status()}>
             <text fg={props.row.state === "ready" ? props.palette.warning : props.palette.muted}>{status()}</text>
@@ -179,6 +179,7 @@ export interface DetailsProps {
   onSelect(id: string): void
   onRefresh(id?: string): void
   onToggleHidden(id: string): void
+  onToggleDisplayMode(): void
   onClose(): void
 }
 
@@ -193,7 +194,8 @@ export function DetailsView(props: DetailsProps) {
         <text fg={props.palette.base}><b>Subscription quota</b></text>
         <text fg={props.palette.muted} onMouseUp={() => props.onClose()}>{"esc ×"}</text>
       </box>
-      <text fg={props.palette.muted}>{props.snapshot.refreshing ? "Refreshing…" : "Provider-reported allowances, shown as remaining."}</text>
+      <text fg={props.palette.base} onMouseUp={() => props.onToggleDisplayMode()}>{`Display: ${displayMode(props.prefs) === "used" ? "Used" : "Remaining"} · u to switch`}</text>
+      <text fg={props.palette.muted}>{props.snapshot.refreshing ? "Refreshing…" : `Provider-reported allowances, shown as ${displayMode(props.prefs)}.`}</text>
       <Show when={message()}>{text => <text fg={props.palette.warning}>{text()}</text>}</Show>
       <For each={rows()}>
         {row => {
@@ -223,7 +225,7 @@ export function DetailsView(props: DetailsProps) {
               </text>
               <box flexDirection="column" marginTop={1} gap={1}>
                 <For each={row.windows}>
-                  {window => <WindowBlock window={window} now={props.now} palette={props.palette} showBar={bars()} />}
+                  {window => <WindowBlock window={window} now={props.now} palette={props.palette} showBar={bars()} mode={displayMode(props.prefs)} />}
                 </For>
                 <Show when={row.windows.length === 0 && row.state !== "loading"}>
                   <text fg={props.palette.muted}>No usage windows returned.</text>
@@ -259,7 +261,7 @@ export function DetailsView(props: DetailsProps) {
       <Show when={!rows().length}>
         <text fg={props.palette.muted}>{message() ? "No readings available yet." : "No Codex or Claude connection found. Connect one in OpenCode."}</text>
       </Show>
-      <text fg={props.palette.muted} wrapMode="word">{"↑/↓ select · enter refresh selected · r refresh all · h hide/show · esc close"}</text>
+      <text fg={props.palette.muted} wrapMode="word">{"↑/↓ select · enter refresh selected · r refresh all · h hide/show · u display mode · esc close"}</text>
     </box>
   )
 }

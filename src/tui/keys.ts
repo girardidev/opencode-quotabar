@@ -5,6 +5,7 @@ export interface DetailsKeyApi {
   select(id: string): void
   refresh(id?: string): void
   toggleHidden(id: string): void
+  toggleDisplayMode(): void
   close(): void
 }
 
@@ -34,5 +35,6 @@ export function detailsCommands(api: DetailsKeyApi): KeyCommand[] {
     { bind: "return", title: "Refresh selected", run: onSelected(id => api.refresh(id)) },
     { bind: "r", title: "Refresh all", run: () => api.refresh() },
     { bind: "h", title: "Hide or show selected in sidebar", run: onSelected(id => api.toggleHidden(id)) },
+    { bind: "u", title: "Switch remaining or used quota display", run: () => api.toggleDisplayMode() },
   ]
 }

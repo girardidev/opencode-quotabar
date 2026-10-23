@@ -1,17 +1,17 @@
-# Graph Report - opencode-sidebar-quota-usage  (2026-10-22)
+# Graph Report - opencode-quotabar  (2026-10-22)
 
 ## Corpus Check
-- 72 files · ~38,768 words
+- 77 files · ~40,344 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 3 file(s) not represented in the graph (top: (none) 1, .lock 1, .toml 1)
 
 ## Summary
-- 642 nodes · 1205 edges · 35 communities (24 shown, 11 thin omitted)
-- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 26 edges (avg confidence: 0.85)
+- 667 nodes · 1234 edges · 38 communities (26 shown, 12 thin omitted)
+- Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 34 edges (avg confidence: 0.88)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `1db6b72a`
+- Built from commit: `7d9a8239`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -44,6 +44,9 @@
 - opencode-sidebar-quota-usage-95o2--initial-commit.md
 - opencode-sidebar-quota-usage-rali--sync-specs-and-archive-add-subscription-quota-plug.md
 - opencode.json
+- opencode-sidebar-quota-usage-w4jz--rename-to-opencode-quotabar-and-add-npm-publish-wo.md
+- headline
+- Requirement: Footer status tolerates providers without a quota row
 
 ## God Nodes (most connected - your core abstractions)
 1. `QuotaService` - 28 edges
@@ -58,61 +61,61 @@
 10. `SidebarRow()` - 12 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `Decisions` --references--> `files()`  [INFERRED]
-  openspec/changes/rename-to-quotabar-and-add-publish-workflow/design.md → test/architecture.test.ts
-- `fail()` --calls--> `CollectError`  [EXTRACTED]
-  test/service-harness.ts → src/diagnostics.ts
-- `Fake` --references--> `QuotaSnapshot`  [EXTRACTED]
-  test/server-plugin.test.ts → src/domain.ts
-- `TestClock` --implements--> `Clock`  [EXTRACTED]
-  test/helpers.ts → src/options.ts
-- `harness()` --calls--> `QuotaService`  [EXTRACTED]
-  test/service-harness.ts → src/service.ts
+- `Decisions` --references--> `headline()`  [INFERRED]
+  openspec/changes/fix-footer-crash-without-current-row/design.md → src/tui/format.ts
+- `Impact` --references--> `headline()`  [INFERRED]
+  openspec/changes/fix-footer-crash-without-current-row/proposal.md → src/tui/format.ts
+- `What Changes` --references--> `headline()`  [INFERRED]
+  openspec/changes/fix-footer-crash-without-current-row/proposal.md → src/tui/format.ts
+- `2. Fix` --references--> `headline()`  [INFERRED]
+  openspec/changes/fix-footer-crash-without-current-row/tasks.md → src/tui/format.ts
+- `Decisions` --references--> `footerText()`  [INFERRED]
+  openspec/changes/fix-footer-crash-without-current-row/design.md → src/tui/index.tsx
 
 ## Import Cycles
 - None detected.
 
-## Communities (35 total, 11 thin omitted)
+## Communities (38 total, 12 thin omitted)
 
 ### Community 0 - "views.tsx"
-Cohesion: 0.08
-Nodes (56): @opentui/solid, solid-js, QuotaRow, QuotaSnapshot, ControllerState, CODE_LABEL, formatAge(), formatDuration() (+48 more)
+Cohesion: 0.07
+Nodes (58): @opentui/solid, solid-js, QuotaRow, QuotaSnapshot, ControllerState, QuotaController, CODE_LABEL, formatAge() (+50 more)
 
 ### Community 1 - "architecture.test.ts"
 Cohesion: 0.10
 Nodes (16): Context, Decisions, Goals / Non-Goals, Migration Plan, Open Questions, Risks / Trade-offs, files(), src (+8 more)
 
 ### Community 2 - "service.ts"
-Cohesion: 0.10
-Nodes (28): Collection, Collector, COMMON, DISCONNECTED, INCOMPATIBLE_AUTH, Source, Text, UNAVAILABLE (+20 more)
+Cohesion: 0.08
+Nodes (29): Collector, Source, connectionKey(), Detected, discover(), DiscoveryPort, DISPLAY, HostConnection (+21 more)
 
 ### Community 3 - "codex.ts"
 Cohesion: 0.06
-Nodes (53): ClaudeDeps, createClaudeCollector(), identity(), abortError(), buildChildEnv(), classifyControlError(), classifyStderr(), CLAUDE_ARGS (+45 more)
+Nodes (62): ClaudeDeps, createClaudeCollector(), identity(), abortError(), buildChildEnv(), classifyControlError(), classifyStderr(), CLAUDE_ARGS (+54 more)
 
 ### Community 4 - "package.json"
 Cohesion: 0.05
 Nodes (42): bugs, url, dependencies, @opencode/client, @opencode/plugin, zod, description, devDependencies (+34 more)
 
 ### Community 5 - "QuotaService"
-Cohesion: 0.16
-Nodes (6): describe(), diagnose(), setup(), Clock, QuotaService, ServiceDeps
+Cohesion: 0.18
+Nodes (5): describe(), diagnose(), setup(), Clock, QuotaService
 
 ### Community 6 - "Requirements"
 Cohesion: 0.07
 Nodes (26): Purpose, Requirement: Account-bound collection, Requirement: Bounded and isolated CLI execution, Requirement: Codex subscription collection, Requirement: Credential-free snapshots, Requirement: Dynamic and partial quota normalization, Requirement: Prompt-free Claude usage collection, Requirement: Supported integration discovery (+18 more)
 
 ### Community 7 - "src/index.ts"
-Cohesion: 0.07
-Nodes (30): @opencode/plugin, zod, CodexCredential, DIAGNOSTIC_CODES, DiagnosticCode, diagnosticSchema, EMPTY_SNAPSHOT, INTEGRATIONS (+22 more)
+Cohesion: 0.09
+Nodes (21): @opencode/plugin, zod, snapshotSchema, hostCodexCredential(), HostContext, hostDiscovery(), RawConnection, resolve() (+13 more)
 
 ### Community 8 - "ADDED Requirements"
 Cohesion: 0.08
 Nodes (24): ADDED Requirements, Requirement: Account-bound collection, Requirement: Bounded and isolated CLI execution, Requirement: Codex subscription collection, Requirement: Credential-free snapshots, Requirement: Dynamic and partial quota normalization, Requirement: Prompt-free Claude usage collection, Requirement: Supported integration discovery (+16 more)
 
 ### Community 9 - "setup"
-Cohesion: 0.12
-Nodes (9): QuotaController, QuotaPort, setup(), Details(), open(), detailsCommands(), DetailsKeyApi, KeyCommand (+1 more)
+Cohesion: 0.14
+Nodes (5): QuotaPort, detailsCommands(), DetailsKeyApi, KeyCommand, api()
 
 ### Community 10 - "opencode-subscription-quota"
 Cohesion: 0.10
@@ -170,25 +173,33 @@ Nodes (6): Capabilities, Impact, Modified Capabilities, New Capabilities, What C
 Cohesion: 0.33
 Nodes (5): 1. Rename package and identifiers, 2. Package metadata, 3. Publish workflow, 4. Documentation, 5. Verification
 
+### Community 35 - "headline"
+Cohesion: 0.13
+Nodes (16): Context, Decisions, Goals / Non-Goals, Open Questions, Risks / Trade-offs, Capabilities, Impact, Modified Capabilities (+8 more)
+
+### Community 36 - "Requirement: Footer status tolerates providers without a quota row"
+Cohesion: 0.29
+Nodes (6): ADDED Requirements, Requirement: Footer status tolerates providers without a quota row, Scenario: Current provider changes to one without a row, Scenario: Current provider has a visible row, Scenario: Current provider row is hidden, Scenario: Provider without a quota row
+
 ## Knowledge Gaps
 - **5 isolated node(s):** `@opencode/client`, `@opencode/theme`, `@types/bun`, `@types/node`, `typescript`
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 288 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **11 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 304 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **12 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `@opencode/plugin` connect `src/index.ts` to `views.tsx`, `package.json`?**
-  _High betweenness centrality (0.031) - this node is a cross-community bridge._
+  _High betweenness centrality (0.030) - this node is a cross-community bridge._
 - **What connects `@opencode/client`, `@opencode/theme`, `@types/bun` to the rest of the system?**
   _5 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `views.tsx` be split into smaller, more focused modules?**
-  _Cohesion score 0.07678410117434507 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.06974921630094044 - nodes in this community are weakly interconnected._
 - **Why does `QuotaSnapshot` connect `views.tsx` to `service.ts`, `QuotaService`, `src/index.ts`?**
-  _High betweenness centrality (0.028) - this node is a cross-community bridge._
+  _High betweenness centrality (0.027) - this node is a cross-community bridge._
 - **Should `architecture.test.ts` be split into smaller, more focused modules?**
   _Cohesion score 0.10144927536231885 - nodes in this community are weakly interconnected._
 - **Why does `QuotaService` connect `QuotaService` to `service.ts`, `src/index.ts`?**
-  _High betweenness centrality (0.024) - this node is a cross-community bridge._
+  _High betweenness centrality (0.023) - this node is a cross-community bridge._
 - **Should `service.ts` be split into smaller, more focused modules?**
-  _Cohesion score 0.09565217391304348 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.08156028368794327 - nodes in this community are weakly interconnected._

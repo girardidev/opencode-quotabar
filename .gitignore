@@ -1,6 +1,9 @@
 # Dependencies
 node_modules/
 
+# Local task tracking
+/.beans/
+
 # Logs
 *.log
 bun-debug.log*

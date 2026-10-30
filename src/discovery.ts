@@ -33,7 +33,13 @@ const CONNECTION_REQUIRED: Record<SupportedIntegration, boolean> = { openai: tru
  */
 const PROVIDER_IDS: Record<SupportedIntegration, readonly string[]> = {
   openai: ["openai"],
-  "claude-code": ["claude-code", "anthropic"],
+  "claude-code": ["claude-code", "anthropic", "claude-agent"],
+}
+
+/** Integration ids whose connection may back an integration, in order of preference. */
+const CONNECTION_IDS: Record<SupportedIntegration, readonly string[]> = {
+  openai: ["openai"],
+  "claude-code": ["claude-code", "claude-agent"],
 }
 
 /**
@@ -47,8 +53,13 @@ export async function discover(port: DiscoveryPort): Promise<Detected[]> {
     const integration = integrations.some(entry => entry.id === id)
     const provider = providers.some(entry => PROVIDER_IDS[id].some(match => entry.id === match || entry.integrationID === match))
     if (!integration && !provider) continue
-    // Connections hang off the integration id; a provider without one cannot be connected.
-    const connection = integration ? await port.activeConnection(id) : undefined
+    // Connections hang off an integration id; a provider without one cannot be connected.
+    let connection: HostConnection | undefined
+    for (const candidate of CONNECTION_IDS[id]) {
+      if (!integrations.some(entry => entry.id === candidate)) continue
+      connection = await port.activeConnection(candidate)
+      if (connection) break
+    }
     found.push({ id, name: DISPLAY[id], connectionRequired: CONNECTION_REQUIRED[id], ...(connection ? { connection } : {}) })
   }
   return found

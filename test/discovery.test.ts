@@ -83,6 +83,32 @@ describe("discover", () => {
     expect(found[0]).toMatchObject({ id: "claude-code", connectionRequired: false, connection: { id: "cred_claude-code" } })
   })
 
+  test("the native claude-agent provider enrolls the Claude row with its external connection", async () => {
+    const found = await discover(
+      port({
+        integrations: async () => [
+          { id: "anthropic", name: "Anthropic" },
+          { id: "claude-agent", name: "Claude Agent" },
+        ],
+        providers: async () => [{ id: "claude-agent", integrationID: null }],
+        activeConnection: async id => (id === "claude-agent" ? conn("cred_agent", "external") : undefined),
+      }),
+    )
+    expect(found).toHaveLength(1)
+    expect(found[0]).toMatchObject({ id: "claude-code", connectionRequired: false, connection: { id: "cred_agent" } })
+  })
+
+  test("an available claude-agent integration without a provider in use is not detected", async () => {
+    const found = await discover(
+      port({
+        integrations: async () => [{ id: "claude-agent", name: "Claude Agent" }],
+        providers: async () => [{ id: "opencode", integrationID: "opencode" }],
+        activeConnection: async id => conn(`cred_${id}`),
+      }),
+    )
+    expect(found).toEqual([])
+  })
+
   test("unrelated providers are not detected", async () => {
     const found = await discover(port({ providers: async () => [{ id: "openrouter", integrationID: "openrouter" }] }))
     expect(found).toEqual([])

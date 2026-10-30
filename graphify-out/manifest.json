@@ -6,14 +6,14 @@
     "semantic_hash": ""
   },
   "package.json": {
-    "mtime": 1792750126.0194342,
-    "seen": 1792751722.3094022,
+    "mtime": 1792765546.46051,
+    "seen": 1793384380.138487,
     "ast_hash": "dc89efe41691bb3c49a52b4f24a5b75a",
     "semantic_hash": ""
   },
   "src/collectors/claude/collector.ts": {
-    "mtime": 1792751750.9750302,
-    "seen": 1792764169.248964,
+    "mtime": 1792765546.4612024,
+    "seen": 1793384380.138488,
     "ast_hash": "745285d9231ed2e5ad94a9c6a827518d",
     "semantic_hash": ""
   },
@@ -48,9 +48,9 @@
     "semantic_hash": ""
   },
   "src/discovery.ts": {
-    "mtime": 1792751750.9752154,
-    "seen": 1792764169.24897,
-    "ast_hash": "3838aa55d7725fadde72695e4b3f277f",
+    "mtime": 1793384358.436919,
+    "seen": 1793384380.1384919,
+    "ast_hash": "9a8f947a8cbc02cce018e224baca89c2",
     "semantic_hash": ""
   },
   "src/domain.ts": {
@@ -72,8 +72,8 @@
     "semantic_hash": ""
   },
   "src/index.ts": {
-    "mtime": 1792751750.9754322,
-    "seen": 1792764169.2489731,
+    "mtime": 1792765546.4615877,
+    "seen": 1793384380.138496,
     "ast_hash": "ac419484d70ad52d8f656d767aef218e",
     "semantic_hash": ""
   },
@@ -96,8 +96,8 @@
     "semantic_hash": ""
   },
   "src/service.ts": {
-    "mtime": 1792751750.9756835,
-    "seen": 1792764169.2489758,
+    "mtime": 1792765546.4618616,
+    "seen": 1793384380.138499,
     "ast_hash": "cee6cbdd4388b4a2db716c7fcb38b5dd",
     "semantic_hash": ""
   },
@@ -108,32 +108,32 @@
     "semantic_hash": ""
   },
   "src/tui/format.ts": {
-    "mtime": 1792763675.0942845,
-    "seen": 1792764169.248977,
+    "mtime": 1792765546.4620824,
+    "seen": 1793384380.1385002,
     "ast_hash": "857532fae43898a6dc74758e33019f6a",
     "semantic_hash": ""
   },
   "src/tui/index.tsx": {
-    "mtime": 1792763720.808246,
-    "seen": 1792764169.248978,
+    "mtime": 1792765546.462326,
+    "seen": 1793384380.1385012,
     "ast_hash": "da3bb45ade78ff8833d32a2fcf652c18",
     "semantic_hash": ""
   },
   "src/tui/keys.ts": {
-    "mtime": 1792763720.8081014,
-    "seen": 1792764169.2489789,
+    "mtime": 1792765546.4625347,
+    "seen": 1793384380.138502,
     "ast_hash": "06136ca7ee2a6603df9fb44ee8d555ea",
     "semantic_hash": ""
   },
   "src/tui/model.ts": {
-    "mtime": 1792763675.0938137,
-    "seen": 1792764169.2489789,
+    "mtime": 1792765546.4627347,
+    "seen": 1793384380.138502,
     "ast_hash": "771e2504ed622124fd113756a21892cc",
     "semantic_hash": ""
   },
   "src/tui/views.tsx": {
-    "mtime": 1792764129.3665147,
-    "seen": 1792764169.24898,
+    "mtime": 1792765546.4629922,
+    "seen": 1793384380.1385028,
     "ast_hash": "9f0e4b386c68fd33a510f64ce3117010",
     "semantic_hash": ""
   },
@@ -150,8 +150,8 @@
     "semantic_hash": ""
   },
   "test/claude-usage.test.ts": {
-    "mtime": 1792751750.9759474,
-    "seen": 1792764169.248982,
+    "mtime": 1792765546.463308,
+    "seen": 1793384380.138505,
     "ast_hash": "b503dac9b6bd1b48d426adcb56121c14",
     "semantic_hash": ""
   },
@@ -162,9 +162,9 @@
     "semantic_hash": ""
   },
   "test/discovery.test.ts": {
-    "mtime": 1792751750.9761438,
-    "seen": 1792764169.248984,
-    "ast_hash": "8bdeeafb809b2d5fc41c95123587a8f4",
+    "mtime": 1793384368.6519234,
+    "seen": 1793384380.138506,
+    "ast_hash": "7ea2fdc522032655c725f5e385155bbd",
     "semantic_hash": ""
   },
   "test/fixtures-sanitized.test.ts": {
@@ -198,8 +198,8 @@
     "semantic_hash": ""
   },
   "test/server-plugin.test.ts": {
-    "mtime": 1792751750.9764433,
-    "seen": 1792764169.248988,
+    "mtime": 1792765546.4638255,
+    "seen": 1793384380.1385112,
     "ast_hash": "22910534f5e433f26fd1e8a9c70051ec",
     "semantic_hash": ""
   },
@@ -210,8 +210,8 @@
     "semantic_hash": ""
   },
   "test/service.test.ts": {
-    "mtime": 1792751750.9767992,
-    "seen": 1792764169.2489889,
+    "mtime": 1792765546.4641595,
+    "seen": 1793384380.138512,
     "ast_hash": "2263ffb4c03b083e1283ee091deec477",
     "semantic_hash": ""
   },
@@ -222,8 +222,8 @@
     "semantic_hash": ""
   },
   "test/tui-format.test.ts": {
-    "mtime": 1792763675.0949695,
-    "seen": 1792764169.248991,
+    "mtime": 1792765546.4645522,
+    "seen": 1793384380.1385138,
     "ast_hash": "6bacec80731c067e7257c93372c23503",
     "semantic_hash": ""
   },
@@ -234,26 +234,26 @@
     "semantic_hash": ""
   },
   "test/tui-keys.test.ts": {
-    "mtime": 1792763767.6726756,
-    "seen": 1792764169.248992,
+    "mtime": 1792765546.4647806,
+    "seen": 1793384380.138515,
     "ast_hash": "cb4b673c4c8969aca1f52eb1c1c22a9a",
     "semantic_hash": ""
   },
   "test/tui-model.test.ts": {
-    "mtime": 1792763767.6723301,
-    "seen": 1792764169.248993,
+    "mtime": 1792765546.465027,
+    "seen": 1793384380.138516,
     "ast_hash": "626078c0ed20b5c99dccb84c9fc609d0",
     "semantic_hash": ""
   },
   "test/tui-plugin.test.tsx": {
-    "mtime": 1792763899.255693,
-    "seen": 1792764169.248993,
+    "mtime": 1792765546.4653544,
+    "seen": 1793384380.138516,
     "ast_hash": "127c768fcde6b60313a721522db79766",
     "semantic_hash": ""
   },
   "test/tui-render.test.tsx": {
-    "mtime": 1792764129.3667004,
-    "seen": 1792764169.248994,
+    "mtime": 1792765546.4657695,
+    "seen": 1793384380.138517,
     "ast_hash": "f27802e0e4eedf350ea74a55fa00d15b",
     "semantic_hash": ""
   },
@@ -276,50 +276,50 @@
     "semantic_hash": ""
   },
   ".opencode/commands/opsx-apply.md": {
-    "mtime": 1792704688.7974036,
-    "seen": 1792707881.9439082,
+    "mtime": 1793383580.147757,
+    "seen": 1793384380.13852,
     "ast_hash": "493200fa13ace24ec1fa879742d9ef8d",
     "semantic_hash": ""
   },
   ".opencode/commands/opsx-archive.md": {
-    "mtime": 1792704688.7979398,
-    "seen": 1792707881.9439092,
+    "mtime": 1793383580.1482294,
+    "seen": 1793384380.1385212,
     "ast_hash": "7535fccc1ac0783c470df9d8e50aa6f7",
     "semantic_hash": ""
   },
   ".opencode/commands/opsx-explore.md": {
-    "mtime": 1792704688.7970133,
-    "seen": 1792707881.9439092,
+    "mtime": 1793383580.1473973,
+    "seen": 1793384380.1385221,
     "ast_hash": "b4cb9e0226fa2b7f3c07f831f7b0b5fc",
     "semantic_hash": ""
   },
   ".opencode/commands/opsx-propose.md": {
-    "mtime": 1792704688.798315,
-    "seen": 1792707881.94391,
+    "mtime": 1793383580.1484027,
+    "seen": 1793384380.1385221,
     "ast_hash": "2316882bdc5014e15badc7f8faffa653",
     "semantic_hash": ""
   },
   ".opencode/skills/openspec-apply-change/SKILL.md": {
-    "mtime": 1792704688.7951427,
-    "seen": 1792707881.943912,
+    "mtime": 1793383580.145974,
+    "seen": 1793384380.1385238,
     "ast_hash": "e26c878bdf3d4705a0e6b0fe3b53ba76",
     "semantic_hash": ""
   },
   ".opencode/skills/openspec-archive-change/SKILL.md": {
-    "mtime": 1792704688.7956767,
-    "seen": 1792707881.943913,
+    "mtime": 1793383580.1466904,
+    "seen": 1793384380.138525,
     "ast_hash": "2a1969d2325505cc4e2b4949e788f530",
     "semantic_hash": ""
   },
   ".opencode/skills/openspec-explore/SKILL.md": {
-    "mtime": 1792704688.794423,
-    "seen": 1792707881.943913,
+    "mtime": 1793383580.145333,
+    "seen": 1793384380.138525,
     "ast_hash": "97b2e1bc68e647d3788cd169feb51ff5",
     "semantic_hash": ""
   },
   ".opencode/skills/openspec-propose/SKILL.md": {
-    "mtime": 1792704688.796294,
-    "seen": 1792707881.943914,
+    "mtime": 1793383580.1469166,
+    "seen": 1793384380.138526,
     "ast_hash": "80fbdb774c2e1efc0c10ad299046aee9",
     "semantic_hash": ""
   },
@@ -330,8 +330,8 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1792764044.2421253,
-    "seen": 1792764169.249012,
+    "mtime": 1792765546.460919,
+    "seen": 1793384380.138529,
     "ast_hash": "b926721b4eb7dec185b60be577783052",
     "semantic_hash": ""
   },
@@ -345,24 +345,6 @@
     "mtime": 1792721368.3495817,
     "seen": 1792722131.684133,
     "ast_hash": "17c88a8c71574912964690105e6d5773",
-    "semantic_hash": ""
-  },
-  ".beans/opencode-sidebar-quota-usage-95o2--initial-commit.md": {
-    "mtime": 1792708572.7431219,
-    "seen": 1792709127.067165,
-    "ast_hash": "499e98e581bed22a70ba79c774becebb",
-    "semantic_hash": ""
-  },
-  ".beans/opencode-sidebar-quota-usage-rali--sync-specs-and-archive-add-subscription-quota-plug.md": {
-    "mtime": 1792708454.1320248,
-    "seen": 1792709127.067165,
-    "ast_hash": "693c5f5f54d6938736c0828e822f6752",
-    "semantic_hash": ""
-  },
-  ".beans/opencode-sidebar-quota-usage-w4jz--rename-to-opencode-quotabar-and-add-npm-publish-wo.md": {
-    "mtime": 1792709127.3720071,
-    "seen": 1792722131.68417,
-    "ast_hash": "266ac17c141976401b51be5cf6f8ff32",
     "semantic_hash": ""
   },
   ".github/workflows/publish.yml": {
@@ -414,32 +396,32 @@
     "semantic_hash": ""
   },
   "openspec/changes/rename-to-quotabar-and-add-publish-workflow/.openspec.yaml": {
-    "mtime": 1792751139.2568204,
-    "seen": 1792751722.3094559,
+    "mtime": 1792765460.6838894,
+    "seen": 1793384380.1385448,
     "ast_hash": "db874330e3bdf09469eb2e2124cebd99",
     "semantic_hash": ""
   },
   "openspec/changes/rename-to-quotabar-and-add-publish-workflow/design.md": {
-    "mtime": 1792751139.2570255,
-    "seen": 1792751722.3094559,
+    "mtime": 1792765460.684122,
+    "seen": 1793384380.1385448,
     "ast_hash": "4b0dc574fe30c59e7041c7fa72dcab10",
     "semantic_hash": ""
   },
   "openspec/changes/rename-to-quotabar-and-add-publish-workflow/proposal.md": {
-    "mtime": 1792751139.2571695,
-    "seen": 1792751722.3094568,
+    "mtime": 1792765460.6842442,
+    "seen": 1793384380.138546,
     "ast_hash": "cc1c372ecdcb51add237194e37edaaac",
     "semantic_hash": ""
   },
   "openspec/changes/rename-to-quotabar-and-add-publish-workflow/specs/package-release-publishing/spec.md": {
-    "mtime": 1792751139.2576005,
-    "seen": 1792751722.309458,
+    "mtime": 1792765460.684473,
+    "seen": 1793384380.138547,
     "ast_hash": "286c1210d9adaf27e868b5cd97f481e5",
     "semantic_hash": ""
   },
   "openspec/changes/rename-to-quotabar-and-add-publish-workflow/tasks.md": {
-    "mtime": 1792751139.2578669,
-    "seen": 1792751722.309458,
+    "mtime": 1792765460.6846364,
+    "seen": 1793384380.138547,
     "ast_hash": "174399c77cd07d47e5fe0b0135d038d3",
     "semantic_hash": ""
   },
@@ -450,135 +432,117 @@
     "semantic_hash": ""
   },
   "openspec/specs/quota-visibility-and-diagnostics/spec.md": {
-    "mtime": 1792750883.5220966,
-    "seen": 1792751722.3094652,
-    "ast_hash": "73222bff460a018d5d77d22ef8e3e779",
+    "mtime": 1792765546.4600046,
+    "seen": 1793384380.138549,
+    "ast_hash": "583f151b940adb3120722f288286c722",
     "semantic_hash": ""
   },
   "openspec/specs/subscription-quota-collection/spec.md": {
-    "mtime": 1792762158.4623327,
-    "seen": 1792764169.249033,
+    "mtime": 1792765546.4602642,
+    "seen": 1793384380.13855,
     "ast_hash": "cae1b0f3580ae903b1b89083924f195f",
     "semantic_hash": ""
   },
-  ".beans/opencode-sidebar-quota-usage-1mxh--fix-footer-crash-when-current-provider-has-no-quot.md": {
-    "mtime": 1792750883.510119,
-    "seen": 1792751722.309435,
-    "ast_hash": "fc6dfe7bffe5eb71ebe27e6a1050a381",
-    "semantic_hash": ""
-  },
-  ".beans/opencode-sidebar-quota-usage-uc67--show-claude-quota-when-anthropic-is-served-by-a-pr.md": {
-    "mtime": 1792751750.9736893,
-    "seen": 1792764169.249003,
-    "ast_hash": "3432cb67caad1f6b56e5ea930a6fa1ef",
-    "semantic_hash": ""
-  },
   "openspec/changes/archive/2026-10-22-fix-footer-crash-without-current-row/.openspec.yaml": {
-    "mtime": 1792750929.228108,
-    "seen": 1792751722.309452,
+    "mtime": 1792765546.4574037,
+    "seen": 1793384380.138535,
     "ast_hash": "db874330e3bdf09469eb2e2124cebd99",
     "semantic_hash": ""
   },
   "openspec/changes/archive/2026-10-22-fix-footer-crash-without-current-row/design.md": {
-    "mtime": 1792750929.228492,
-    "seen": 1792751722.309453,
+    "mtime": 1792765546.4575288,
+    "seen": 1793384380.138535,
     "ast_hash": "ca151e6917737ce94596ac92e569556e",
     "semantic_hash": ""
   },
   "openspec/changes/archive/2026-10-22-fix-footer-crash-without-current-row/proposal.md": {
-    "mtime": 1792750929.2287621,
-    "seen": 1792751722.309454,
+    "mtime": 1792765546.457632,
+    "seen": 1793384380.138536,
     "ast_hash": "bfa514652b53464cc213585d724b5f49",
     "semantic_hash": ""
   },
   "openspec/changes/archive/2026-10-22-fix-footer-crash-without-current-row/specs/quota-visibility-and-diagnostics/spec.md": {
-    "mtime": 1792750929.2292347,
-    "seen": 1792751722.309454,
+    "mtime": 1792765546.4579096,
+    "seen": 1793384380.138537,
     "ast_hash": "81929a2af6de1c37a7b97670b0a9bc13",
     "semantic_hash": ""
   },
   "openspec/changes/archive/2026-10-22-fix-footer-crash-without-current-row/tasks.md": {
-    "mtime": 1792750929.2294781,
-    "seen": 1792751722.3094552,
+    "mtime": 1792765546.4580426,
+    "seen": 1793384380.138537,
     "ast_hash": "9bd011f0d0539ec6e9f8786884d91ba3",
     "semantic_hash": ""
   },
-  ".beans/opencode-sidebar-quota-usage-nit9--clarify-npm-trusted-publisher-settings.md": {
-    "mtime": 1792763087.7899246,
-    "seen": 1792764169.2489989,
-    "ast_hash": "c994c332e2ce4eb75d1bfbf9e7c59f13",
-    "semantic_hash": ""
-  },
-  ".beans/opencode-sidebar-quota-usage-nxql--implement-compact-quota-display.md": {
-    "mtime": 1792764140.4711082,
-    "seen": 1792764169.2489998,
-    "ast_hash": "08dda545054bad891165250760f29340",
-    "semantic_hash": ""
-  },
-  ".beans/opencode-sidebar-quota-usage-u2w0--propose-compact-quota-ui-and-global-usage-display.md": {
-    "mtime": 1792763142.6818037,
-    "seen": 1792764169.249002,
-    "ast_hash": "08a1b38e90fde86e11f57464912944d3",
-    "semantic_hash": ""
-  },
   "openspec/changes/archive/2026-10-23-show-claude-quota-for-anthropic-provider/.openspec.yaml": {
-    "mtime": 1792751750.9739249,
-    "seen": 1792764169.2490208,
+    "mtime": 1792765546.459114,
+    "seen": 1793384380.138541,
     "ast_hash": "4a33b58f0c8a77f25b6316ea945adf72",
     "semantic_hash": ""
   },
   "openspec/changes/archive/2026-10-23-show-claude-quota-for-anthropic-provider/design.md": {
-    "mtime": 1792751750.9741173,
-    "seen": 1792764169.249022,
+    "mtime": 1792765546.4592652,
+    "seen": 1793384380.1385422,
     "ast_hash": "801fab472d636f20f50c18216037c5d2",
     "semantic_hash": ""
   },
   "openspec/changes/archive/2026-10-23-show-claude-quota-for-anthropic-provider/proposal.md": {
-    "mtime": 1792751750.9742727,
-    "seen": 1792764169.249023,
+    "mtime": 1792765546.4593778,
+    "seen": 1793384380.1385431,
     "ast_hash": "5c4b27b2a7cb31064ef3652e6df4392c",
     "semantic_hash": ""
   },
   "openspec/changes/archive/2026-10-23-show-claude-quota-for-anthropic-provider/specs/subscription-quota-collection/spec.md": {
-    "mtime": 1792751750.9745853,
-    "seen": 1792764169.249023,
+    "mtime": 1792765546.459646,
+    "seen": 1793384380.1385431,
     "ast_hash": "3805ce13402f6fdb69d0d6f20bc866c1",
     "semantic_hash": ""
   },
   "openspec/changes/archive/2026-10-23-show-claude-quota-for-anthropic-provider/tasks.md": {
-    "mtime": 1792751750.9747705,
-    "seen": 1792764169.249024,
+    "mtime": 1792765546.459768,
+    "seen": 1793384380.138544,
     "ast_hash": "9365bebad003976aebc30d6fa1c7601b",
     "semantic_hash": ""
   },
-  "openspec/changes/compact-quota-display/.openspec.yaml": {
-    "mtime": 1792762938.957295,
-    "seen": 1792764169.249024,
+  ".opencode/commands/opsx-sync.md": {
+    "mtime": 1793383580.1479762,
+    "seen": 1793384380.1385229,
+    "ast_hash": "b39db5de676f4bf2d0b8f5dd1d07721d",
+    "semantic_hash": ""
+  },
+  ".opencode/skills/openspec-sync-specs/SKILL.md": {
+    "mtime": 1793383580.1465034,
+    "seen": 1793384380.138527,
+    "ast_hash": "ca0a72a09ab4270d6868acc01dc9e6c9",
+    "semantic_hash": ""
+  },
+  "openspec/changes/archive/2026-10-23-compact-quota-display/.openspec.yaml": {
+    "mtime": 1792765546.458219,
+    "seen": 1793384380.138538,
     "ast_hash": "4a33b58f0c8a77f25b6316ea945adf72",
     "semantic_hash": ""
   },
-  "openspec/changes/compact-quota-display/design.md": {
-    "mtime": 1792763080.3977427,
-    "seen": 1792764169.249025,
+  "openspec/changes/archive/2026-10-23-compact-quota-display/design.md": {
+    "mtime": 1792765546.4583864,
+    "seen": 1793384380.138539,
     "ast_hash": "38b15e842db328b9d79db316747d06c7",
     "semantic_hash": ""
   },
-  "openspec/changes/compact-quota-display/proposal.md": {
-    "mtime": 1792762970.0785093,
-    "seen": 1792764169.249026,
+  "openspec/changes/archive/2026-10-23-compact-quota-display/proposal.md": {
+    "mtime": 1792765546.45852,
+    "seen": 1793384380.138539,
     "ast_hash": "66afb821f9c88ef1cb2744e149beb16c",
     "semantic_hash": ""
   },
-  "openspec/changes/compact-quota-display/specs/quota-visibility-and-diagnostics/spec.md": {
-    "mtime": 1792763080.3981702,
-    "seen": 1792764169.249026,
+  "openspec/changes/archive/2026-10-23-compact-quota-display/specs/quota-visibility-and-diagnostics/spec.md": {
+    "mtime": 1792765546.458837,
+    "seen": 1793384380.13854,
     "ast_hash": "afb22e196a831843b26f97e0cf65805b",
     "semantic_hash": ""
   },
-  "openspec/changes/compact-quota-display/tasks.md": {
-    "mtime": 1792764159.4949212,
-    "seen": 1792764169.249027,
-    "ast_hash": "787190f2989401474c9c6d3268701c32",
+  "openspec/changes/archive/2026-10-23-compact-quota-display/tasks.md": {
+    "mtime": 1792765546.4589753,
+    "seen": 1793384380.138541,
+    "ast_hash": "3ece91ec55e8ca7b485f44c1beac0657",
     "semantic_hash": ""
   }
 }
